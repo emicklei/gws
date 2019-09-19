@@ -2,7 +2,8 @@
 
 ## examples
 
-    gsuite user
+    gsuite user list
+    gsuite user list -limit 1 -format JSON
 
 ## features
 

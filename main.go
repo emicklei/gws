@@ -22,20 +22,40 @@ func newApp() *cli.App {
 	app.EnableBashCompletion = true
 	app.Name = "gsuite"
 	app.Usage = "Google G Suite command line tool"
+	// override -v
+	cli.VersionFlag = cli.BoolFlag{
+		Name:  "print-version, V",
+		Usage: "print only the version",
+	}
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
-			Name:  "v",
+			Name:  "verbose, v",
 			Usage: "verbose logging",
 		},
 	}
 	app.Commands = []cli.Command{
 		{
-			Name:  "user",
-			Usage: "Show list of all users",
-			Action: func(c *cli.Context) error {
-				return cmdUserList(c)
+			Name: "user",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "Show list of all users",
+					Flags: []cli.Flag{
+						cli.IntFlag{
+							Name:  "limit",
+							Usage: "-limit 10",
+						},
+						cli.StringFlag{
+							Name:  "format",
+							Usage: "-format JSON",
+						},
+					},
+					Action: func(c *cli.Context) error {
+						return cmdUserList(c)
+					},
+					ArgsUsage: `user list`,
+				},
 			},
-			ArgsUsage: `user`,
 		},
 	}
 	return app
