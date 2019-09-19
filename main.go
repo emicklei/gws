@@ -35,12 +35,27 @@ func newApp() *cli.App {
 	}
 	app.Commands = []cli.Command{
 		{
-			Name:  "user",
-			Usage: "Show list of all users",
-			Action: func(c *cli.Context) error {
-				return cmdUserList(c)
+			Name: "user",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "Show list of all users",
+					Flags: []cli.Flag{
+						cli.IntFlag{
+							Name:  "limit",
+							Usage: "-limit 10",
+						},
+						cli.StringFlag{
+							Name:  "format",
+							Usage: "-format JSON",
+						},
+					},
+					Action: func(c *cli.Context) error {
+						return cmdUserList(c)
+					},
+					ArgsUsage: `user list`,
+				},
 			},
-			ArgsUsage: `user`,
 		},
 	}
 	return app
