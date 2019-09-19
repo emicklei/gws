@@ -22,9 +22,14 @@ func newApp() *cli.App {
 	app.EnableBashCompletion = true
 	app.Name = "gsuite"
 	app.Usage = "Google G Suite command line tool"
+	// override -v
+	cli.VersionFlag = cli.BoolFlag{
+		Name:  "print-version, V",
+		Usage: "print only the version",
+	}
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
-			Name:  "v",
+			Name:  "verbose, v",
 			Usage: "verbose logging",
 		},
 	}
