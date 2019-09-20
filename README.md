@@ -22,6 +22,18 @@
     gsuite group list    
     gsuite group members all@company.com
     gsuite group info all@company.com
+    
+    gsuite reset
+
+## requirements (TOWRITE)
+
+- A G Suite domain with API access enabled
+- A Google account in that domain with administrator privileges
+- A Google Cloud Platform project with Directory API enabled
+
+[missinglink]
+
+In resulting dialog click DOWNLOAD CLIENT CONFIGURATION and save the file *credentials.json* to your *home* directory.
 
 ## permissions
 

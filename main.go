@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/urfave/cli"
@@ -42,7 +44,8 @@ func newApp() *cli.App {
 	}
 	app.Commands = []cli.Command{
 		{
-			Name: "user",
+			Name:  "user",
+			Usage: "Retrieving information related to user accounts",
 			Subcommands: []cli.Command{
 				{
 					Name:  "list",
@@ -79,7 +82,8 @@ func newApp() *cli.App {
 			},
 		},
 		{
-			Name: "group",
+			Name:  "group",
+			Usage: "Retrieving information related to groups",
 			Subcommands: []cli.Command{
 				{
 					Name:  "list",
@@ -114,6 +118,16 @@ func newApp() *cli.App {
 					Flags:     []cli.Flag{format},
 					ArgsUsage: `user info all@company.com`,
 				},
+			},
+		},
+		{
+			Name:  "reset",
+			Usage: "Forget about the cached credentials and scopes",
+			Action: func(c *cli.Context) error {
+				if c.GlobalBool("v") {
+					fmt.Println("[gsuite] delete $HOME/gsuite-token.json (if present)")
+				}
+				return os.Remove(filepath.Join(os.Getenv("HOME"), "gsuite-token.json"))
 			},
 		},
 	}
