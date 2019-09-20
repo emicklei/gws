@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 
@@ -26,10 +25,7 @@ func cmdUserList(c *cli.Context) error {
 		return fmt.Errorf("unable to retrieve users in domain: %v", err)
 	}
 
-	wantsJSON := c.String("format") == "JSON"
-	if wantsJSON {
-		data, _ := json.MarshalIndent(r.Users, "", "\t")
-		fmt.Println(string(data))
+	if optionJSON(c, r.Users) {
 		return nil
 	}
 	for _, u := range r.Users {
@@ -85,9 +81,37 @@ func cmdUserMembershipList(c *cli.Context) error {
 	}
 	done()
 
+	if optionJSON(c, membership) {
+		return nil
+	}
 	for _, g := range membership {
 		// email is default
 		fmt.Println(g.Email)
 	}
+	return nil
+}
+
+func cmdUserInfo(c *cli.Context) error {
+
+	client := sharedAuthClient()
+
+	srv, err := admin.New(client)
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %v", err)
+	}
+
+	userKey := c.Args().Get(0)
+	if len(userKey) == 0 {
+		return fmt.Errorf("missing user email in command")
+	}
+
+	r, err := srv.Users.Get(userKey).Do()
+	if err != nil {
+		return fmt.Errorf("unable to retrieve user [%s] because: %v", userKey, err)
+	}
+	if optionJSON(c, r) {
+		return nil
+	}
+	fmt.Printf("%s (%s) [suspended=%v]\n", r.PrimaryEmail, r.Name.FullName, r.Suspended)
 	return nil
 }

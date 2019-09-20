@@ -36,6 +36,10 @@ func newApp() *cli.App {
 			Usage: "verbose logging",
 		},
 	}
+	format := cli.StringFlag{
+		Name:  "format",
+		Usage: "-format JSON",
+	}
 	app.Commands = []cli.Command{
 		{
 			Name: "user",
@@ -48,10 +52,7 @@ func newApp() *cli.App {
 							Name:  "limit",
 							Usage: "-limit 10",
 						},
-						cli.StringFlag{
-							Name:  "format",
-							Usage: "-format JSON",
-						},
+						format,
 					},
 					Action: func(c *cli.Context) error {
 						return cmdUserList(c)
@@ -66,6 +67,15 @@ func newApp() *cli.App {
 					},
 					ArgsUsage: `user membership john.doe@company.com`,
 				},
+				{
+					Name:  "info",
+					Usage: "Show user details",
+					Action: func(c *cli.Context) error {
+						return cmdUserInfo(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `user info john.doe@company.com`,
+				},
 			},
 		},
 		{
@@ -79,10 +89,7 @@ func newApp() *cli.App {
 							Name:  "limit",
 							Usage: "-limit 10",
 						},
-						cli.StringFlag{
-							Name:  "format",
-							Usage: "-format JSON",
-						},
+						format,
 					},
 					Action: func(c *cli.Context) error {
 						return cmdGroupList(c)
@@ -95,7 +102,17 @@ func newApp() *cli.App {
 					Action: func(c *cli.Context) error {
 						return cmdGroupMembers(c)
 					},
+					Flags:     []cli.Flag{format},
 					ArgsUsage: `group members all@company.com`,
+				},
+				{
+					Name:  "info",
+					Usage: "Show group details",
+					Action: func(c *cli.Context) error {
+						return cmdGroupInfo(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `user info all@company.com`,
 				},
 			},
 		},

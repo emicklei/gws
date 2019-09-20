@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
@@ -40,4 +41,13 @@ func showSpinnerWhile(c *cli.Context) func() {
 		// remove spinner
 		fmt.Fprintf(os.Stderr, "\033[%dD", 1)
 	}
+}
+
+func optionJSON(c *cli.Context, v interface{}) bool {
+	wantsJSON := c.String("format") == "JSON"
+	if wantsJSON {
+		data, _ := json.MarshalIndent(v, "", "\t")
+		fmt.Println(string(data))
+	}
+	return wantsJSON
 }

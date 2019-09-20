@@ -6,14 +6,20 @@
 - retrieve list of groups
 - retrieve membership of a user
 - retrieve members of a group
+- show details of user
+- show details of group
+- any command can produce JSON format using `-format JSON` at the end of the command
 
 ## examples
 
     gsuite user list
-    gsuite user list -limit 1 -format JSON
-    gsuite group list
+    gsuite user list -limit 4
     gsuite user membership john.doe@company.com
+    gsuite user info john.doe@company.com
+
+    gsuite group list    
     gsuite group members all@company.com
+    gsuite group info all@company.com
 
 ## permissions
 
