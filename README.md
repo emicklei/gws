@@ -1,5 +1,7 @@
 # gsuite - command line tool to use the Google G Suite Admin SDK
 
+[![Build Status](https://travis-ci.org/emicklei/gsuite.png)](https://travis-ci.org/emicklei/gsuite)
+
 ## features
 
 - retrieve list of users
@@ -35,3 +37,5 @@ See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 This installation requires the Go SDK (1.13+).
 
     go install github.com/emicklei/gsuite
+
+&copy; 2019, ernestmicklei.com. MIT License. Contributions welcome.
