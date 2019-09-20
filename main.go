@@ -57,6 +57,29 @@ func newApp() *cli.App {
 				},
 			},
 		},
+		{
+			Name: "group",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "Show list of all groups",
+					Flags: []cli.Flag{
+						cli.IntFlag{
+							Name:  "limit",
+							Usage: "-limit 10",
+						},
+						cli.StringFlag{
+							Name:  "format",
+							Usage: "-format JSON",
+						},
+					},
+					Action: func(c *cli.Context) error {
+						return cmdGroupList(c)
+					},
+					ArgsUsage: `group list`,
+				},
+			},
+		},
 	}
 	return app
 }

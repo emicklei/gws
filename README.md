@@ -1,14 +1,24 @@
 # gsuite - command line tool to use the Google G Suite Admin SDK
 
+## features
+
+- retrieve list of users
+- retrieve list of groups
+
 ## examples
 
     gsuite user list
     gsuite user list -limit 1 -format JSON
+    gsuite group list
 
-## features
+## permissions
 
-- retrieve list of users
+Using the tool requires the following authentication scopes to be consent per user.
 
+- https://www.googleapis.com/auth/admin.directory.group.member.readonly
+- https://www.googleapis.com/auth/admin.directory.user.readonly
+
+See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
 ## install from source
 

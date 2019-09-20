@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os" 
+	"os"
 	"sync"
 
 	"golang.org/x/net/context"
@@ -19,8 +19,8 @@ var once sync.Once
 var sharedClient *http.Client
 
 func sharedAuthClient() *http.Client {
-	once.Do(func(){
-		sharedClient= newAuthClient()
+	once.Do(func() {
+		sharedClient = newAuthClient()
 	})
 	return sharedClient
 }
@@ -32,7 +32,11 @@ func newAuthClient() *http.Client {
 	}
 
 	// If modifying these scopes, delete your previously saved token.json.
-	config, err := google.ConfigFromJSON(b, admin.AdminDirectoryUserReadonlyScope)
+	// https://developers.google.com/identity/protocols/googlescopes
+	// https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
+	config, err := google.ConfigFromJSON(b,
+		admin.AdminDirectoryGroupReadonlyScope,
+		admin.AdminDirectoryUserReadonlyScope)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)
 	}
