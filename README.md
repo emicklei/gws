@@ -4,12 +4,16 @@
 
 - retrieve list of users
 - retrieve list of groups
+- retrieve membership of a user
+- retrieve members of a group
 
 ## examples
 
     gsuite user list
     gsuite user list -limit 1 -format JSON
     gsuite group list
+    gsuite user membership john.doe@company.com
+    gsuite group members all@company.com
 
 ## permissions
 

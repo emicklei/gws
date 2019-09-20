@@ -37,3 +37,26 @@ func cmdGroupList(c *cli.Context) error {
 	}
 	return nil
 }
+
+func cmdGroupMembers(c *cli.Context) error {
+	client := sharedAuthClient()
+
+	srv, err := admin.New(client)
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory Client %v", err)
+	}
+
+	groupKey := c.Args().Get(0)
+	if len(groupKey) == 0 {
+		return fmt.Errorf("missing group email in command")
+	}
+	r, err := srv.Members.List(groupKey).Do()
+	if err != nil {
+		return fmt.Errorf("unable to retrieve members of group: %v", err)
+	}
+	for _, g := range r.Members {
+		// email is default
+		fmt.Println(g.Email)
+	}
+	return nil
+}

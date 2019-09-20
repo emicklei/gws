@@ -21,7 +21,10 @@ func newApp() *cli.App {
 	app.Version = version
 	app.EnableBashCompletion = true
 	app.Name = "gsuite"
-	app.Usage = "Google G Suite command line tool"
+	app.Usage = `Google G Suite command line tool
+
+	see https://github.com/emicklei/gsuite for documentation.
+`
 	// override -v
 	cli.VersionFlag = cli.BoolFlag{
 		Name:  "print-version, V",
@@ -55,6 +58,14 @@ func newApp() *cli.App {
 					},
 					ArgsUsage: `user list`,
 				},
+				{
+					Name:  "membership",
+					Usage: "Show list of groups for which the user has a membership",
+					Action: func(c *cli.Context) error {
+						return cmdUserMembershipList(c)
+					},
+					ArgsUsage: `user membership john.doe@company.com`,
+				},
 			},
 		},
 		{
@@ -77,6 +88,14 @@ func newApp() *cli.App {
 						return cmdGroupList(c)
 					},
 					ArgsUsage: `group list`,
+				},
+				{
+					Name:  "members",
+					Usage: "Show members of a group",
+					Action: func(c *cli.Context) error {
+						return cmdGroupMembers(c)
+					},
+					ArgsUsage: `group members all@company.com`,
 				},
 			},
 		},
