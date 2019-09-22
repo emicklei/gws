@@ -1,4 +1,4 @@
-# gsuite - command line tool to use the Google G Suite Admin SDK
+# gdom - command line tool to use the Google G Suite Admin SDK
 
 [![Build Status](https://travis-ci.org/emicklei/gsuite.png)](https://travis-ci.org/emicklei/gsuite)
 
@@ -14,16 +14,16 @@
 
 ## examples
 
-    gsuite user list
-    gsuite user list -limit 4
-    gsuite user membership john.doe@company.com
-    gsuite user info john.doe@company.com
+    gdom user list
+    gdom user list -limit 4
+    gdom user membership john.doe@company.com
+    gdom user info john.doe@company.com
 
-    gsuite group list    
-    gsuite group members all@company.com
-    gsuite group info all@company.com
+    gdom group list    
+    gdom group members all@company.com
+    gdom group info all@company.com
     
-    gsuite reset
+    gdom reset
 
 ## requirements (TOWRITE)
 
@@ -48,6 +48,6 @@ See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
 This installation requires the Go SDK (1.13+).
 
-    go install github.com/emicklei/gsuite
+    go install github.com/emicklei/gdom
 
 &copy; 2019, ernestmicklei.com. MIT License. Contributions welcome.
