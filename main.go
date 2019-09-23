@@ -22,10 +22,10 @@ func newApp() *cli.App {
 	app := cli.NewApp()
 	app.Version = version
 	app.EnableBashCompletion = true
-	app.Name = "gsuite"
+	app.Name = "gdom"
 	app.Usage = `Google G Suite command line tool
 
-	see https://github.com/emicklei/gsuite for documentation.
+	see https://github.com/emicklei/gdom for documentation.
 `
 	// override -v
 	cli.VersionFlag = cli.BoolFlag{
@@ -125,9 +125,9 @@ func newApp() *cli.App {
 			Usage: "Forget about the cached credentials and scopes",
 			Action: func(c *cli.Context) error {
 				if c.GlobalBool("v") {
-					fmt.Println("[gsuite] delete $HOME/gsuite-token.json (if present)")
+					fmt.Println("[gdom] delete $HOME/gdom-token.json (if present)")
 				}
-				return os.Remove(filepath.Join(os.Getenv("HOME"), "gsuite-token.json"))
+				return os.Remove(filepath.Join(os.Getenv("HOME"), "gdom-token.json"))
 			},
 		},
 	}

@@ -1,0 +1,3 @@
+# Troubleshooting
+
+unable to retrieve users in domain: googleapi: Error 403: Access Not Configured. Admin Directory API has not been used in project xxxxxxxx before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/admin.googleapis.com/overview?project=xxxxxxxx then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry., accessNotConfigured

@@ -27,7 +27,7 @@ func sharedAuthClient() *http.Client {
 }
 
 func newAuthClient() *http.Client {
-	b, err := ioutil.ReadFile(filepath.Join(os.Getenv("HOME"), "credentials.json"))
+	b, err := ioutil.ReadFile(filepath.Join(os.Getenv("HOME"), "gdom-credentials.json"))
 	if err != nil {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
@@ -49,7 +49,7 @@ func getClient(config *oauth2.Config) *http.Client {
 	// The file token.json stores the user's access and refresh tokens, and is
 	// created automatically when the authorization flow completes for the first
 	// time.
-	tokFile := filepath.Join(os.Getenv("HOME"), "gsuite-token.json")
+	tokFile := filepath.Join(os.Getenv("HOME"), "gdom-token.json")
 	tok, err := tokenFromFile(tokFile)
 	if err != nil {
 		tok = getTokenFromWeb(config)

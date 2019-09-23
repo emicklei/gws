@@ -1,6 +1,6 @@
 # gdom - command line tool to use the Google G Suite Admin SDK
 
-[![Build Status](https://travis-ci.org/emicklei/gsuite.png)](https://travis-ci.org/emicklei/gsuite)
+[![Build Status](https://travis-ci.org/emicklei/gdom.png)](https://travis-ci.org/emicklei/gdom)
 
 ## features
 
@@ -25,19 +25,23 @@
     
     gdom reset
 
-## requirements (TOWRITE)
+## requirements
 
 - A G Suite domain with API access enabled
 - A Google account in that domain with administrator privileges
-- A Google Cloud Platform project with Directory API enabled
+- A Google Cloud Platform project with Admin SDK enabled ( https://console.developers.google.com/apis/library/admin.googleapis.com?project=YOURPROJECT )
 
-[missinglink]
 
-In resulting dialog click DOWNLOAD CLIENT CONFIGURATION and save the file *credentials.json* to your *home* directory.
+## tool authentication
 
-## permissions
+- Using the Google Cloud Platform console, create a new OAuth 2.0 client ID credential in the project for which you enabled the Admin SDK.
+- Download the JSON file from the list of Credentials (download button on the right).
+- Save the file to *gdom-credentials.json* in your *home* directory.
 
-Using the tool requires the following authentication scopes to be consent per user.
+## user permissions
+
+*gdom* requires the following authentication scopes to be consent per user.
+You will be asked to accept those on the first time you use *gdom*.
 
 - https://www.googleapis.com/auth/admin.directory.group.member.readonly
 - https://www.googleapis.com/auth/admin.directory.user.readonly
