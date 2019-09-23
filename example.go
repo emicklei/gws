@@ -11,33 +11,33 @@ func cmdShowExamples(c *cli.Context) error {
 - - - - - - - - - - - - - - - - - - - - 
 List the email addresses of all users.
 	
-	gdom user list
+	gsuite user list
 
 List the groups of which the user is a member.
 
-	gdom user membership john.doe@company.com
+	gsuite user membership john.doe@company.com
 
 Show details of a user.
 
-	gdom user info john.doe@company.com
+	gsuite user info john.doe@company.com
 
 List the email address of all groups
 
-	gdom group list
+	gsuite group list
 
 List the members of a group
 
-	gdom group members all@company.com
+	gsuite group members all@company.com
 
 Show details of a group.
 
-	gdom group info all@company.com
+	gsuite group info all@company.com
 
 List the available roles to manage.
 
-	gdom role list
+	gsuite role list
 
-See full documentation on https://github.com/emicklei/gdom
+See full documentation on https://github.com/emicklei/gsuite
 - - - - - - - - - - - - - - - - - - - -
 `
 	fmt.Println(examples)

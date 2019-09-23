@@ -1,6 +1,6 @@
-# gdom - command line tool to use the Google G Suite Admin SDK
+# gsuite - command line tool to use the Google G Suite Admin SDK
 
-[![Build Status](https://travis-ci.org/emicklei/gdom.png)](https://travis-ci.org/emicklei/gdom)
+[![Build Status](https://travis-ci.org/emicklei/gsuite.png)](https://travis-ci.org/emicklei/gsuite)
 
 ## features
 
@@ -15,16 +15,16 @@
 
 ## examples
 
-    gdom user list
-    gdom user list -limit 4
-    gdom user membership john.doe@company.com
-    gdom user info john.doe@company.com
+    gsuite user list
+    gsuite user list -limit 4
+    gsuite user membership john.doe@company.com
+    gsuite user info john.doe@company.com
 
-    gdom group list    
-    gdom group members all@company.com
-    gdom group info all@company.com
+    gsuite group list    
+    gsuite group members all@company.com
+    gsuite group info all@company.com
     
-    gdom role assignments _SEED_ADMIN_ROLE
+    gsuite role assignments _SEED_ADMIN_ROLE
 
 ## requirements
 
@@ -37,15 +37,16 @@
 
 - Using the Google Cloud Platform console, create a new OAuth 2.0 client ID credential in the project for which you enabled the Admin SDK.
 - Download the JSON file from the list of Credentials (download button on the right).
-- Save the file to *gdom-credentials.json* in your *home* directory.
+- Save the file to *gsuite-credentials.json* in your *home* directory.
 
 ## user permissions
 
-*gdom* requires the following authentication scopes to be consent per user.
-You will be asked to accept those on the first time you use *gdom*.
+*gsuite* requires the following authentication scopes to be consent per user.
+You will be asked to accept those on the first time you use *gsuite*.
 
 - https://www.googleapis.com/auth/admin.directory.group.member.readonly
 - https://www.googleapis.com/auth/admin.directory.user.readonly
+- https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
 
 See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
@@ -53,10 +54,10 @@ See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
 This installation requires the Go SDK (1.13+).
 
-    go install github.com/emicklei/gdom
+    go install github.com/emicklei/gsuite
 
 ## help
 
-Have problems using *gdom* ? Read about [known errors](/errors.md)
+Have problems using *gsuite* ? Read about [known errors](/errors.md)
 
 &copy; 2019, ernestmicklei.com. MIT License. Contributions welcome.

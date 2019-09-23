@@ -18,4 +18,4 @@ In G Suite, make sure the you have the permissions to read users and groups.
 
     2019/09/23 12:08:01 unable to retrieve roles in domain: googleapi: Error 403: Insufficient Permission: Request had insufficient authentication scopes., insufficientPermissions
 
-You do not have an (updated) authorisation file in your home directory. Remove the file *gdom-token.json* and retry.
+You do not have an (updated) authorisation file in your home directory. Remove the file *gsuite-token.json* and retry.

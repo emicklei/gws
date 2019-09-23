@@ -1,4 +1,4 @@
-module github.com/emicklei/gdom
+module github.com/emicklei/gsuite
 
 go 1.12
 
