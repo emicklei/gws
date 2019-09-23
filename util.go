@@ -44,7 +44,7 @@ func showSpinnerWhile(c *cli.Context) func() {
 }
 
 func optionJSON(c *cli.Context, v interface{}) bool {
-	wantsJSON := c.String("format") == "JSON"
+	wantsJSON := c.Bool("json")
 	if wantsJSON {
 		data, _ := json.MarshalIndent(v, "", "\t")
 		fmt.Println(string(data))

@@ -10,7 +10,7 @@
 - retrieve members of a group
 - show details of user
 - show details of group
-- any command can produce JSON format using `-format JSON` at the end of the command
+- any command can produce JSON format using `-json` at the end of the command
 
 ## examples
 

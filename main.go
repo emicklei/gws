@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/urfave/cli"
@@ -38,9 +36,9 @@ func newApp() *cli.App {
 			Usage: "verbose logging",
 		},
 	}
-	format := cli.StringFlag{
-		Name:  "format",
-		Usage: "-format JSON",
+	format := cli.BoolFlag{
+		Name:  "json, JSON",
+		Usage: "-json or -JSON",
 	}
 	app.Commands = []cli.Command{
 		{
@@ -121,13 +119,10 @@ func newApp() *cli.App {
 			},
 		},
 		{
-			Name:  "reset",
-			Usage: "Forget about the cached credentials and scopes",
+			Name:  "examples",
+			Usage: "Show examples of how to use gdom.",
 			Action: func(c *cli.Context) error {
-				if c.GlobalBool("v") {
-					fmt.Println("[gdom] delete $HOME/gdom-token.json (if present)")
-				}
-				return os.Remove(filepath.Join(os.Getenv("HOME"), "gdom-token.json"))
+				return cmdShowExamples(c)
 			},
 		},
 	}

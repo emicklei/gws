@@ -112,6 +112,6 @@ func cmdUserInfo(c *cli.Context) error {
 	if optionJSON(c, r) {
 		return nil
 	}
-	fmt.Printf("%s (%s) [suspended=%v]\n", r.PrimaryEmail, r.Name.FullName, r.Suspended)
+	fmt.Printf("%s (%s) [tel: %s, 2nd: %s, suspended: %v]\n", r.PrimaryEmail, r.Name.FullName, r.RecoveryPhone, r.RecoveryEmail, r.Suspended)
 	return nil
 }
