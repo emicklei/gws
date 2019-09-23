@@ -1,7 +1,5 @@
 # gsuite - command line tool to use the Google G Suite Admin SDK
 
-[![Build Status](https://travis-ci.org/emicklei/gsuite.png)](https://travis-ci.org/emicklei/gsuite)
-
 ## features
 
 - retrieve list of users
@@ -24,6 +22,7 @@
     gsuite group members all@company.com
     gsuite group info all@company.com
     
+    gsuite role list
     gsuite role assignments _SEED_ADMIN_ROLE
 
 ## requirements
