@@ -119,6 +119,36 @@ func newApp() *cli.App {
 			},
 		},
 		{
+			Name:  "role",
+			Usage: "Retrieving information related to roles",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "Show list of all roles",
+					Flags: []cli.Flag{
+						cli.IntFlag{
+							Name:  "limit",
+							Usage: "-limit 10",
+						},
+						format,
+					},
+					Action: func(c *cli.Context) error {
+						return cmdRoleList(c)
+					},
+					ArgsUsage: `role list`,
+				},
+				{
+					Name:  "assignments",
+					Usage: "Show assignments of a role",
+					Action: func(c *cli.Context) error {
+						return cmdRoleAssignment(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `role assignments _HELP_DESK_ADMIN_ROLE`,
+				},
+			},
+		},
+		{
 			Name:  "examples",
 			Usage: "Show examples of how to use gdom.",
 			Action: func(c *cli.Context) error {

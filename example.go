@@ -33,6 +33,10 @@ Show details of a group.
 
 	gdom group info all@company.com
 
+List the available roles to manage.
+
+	gdom role list
+
 See full documentation on https://github.com/emicklei/gdom
 - - - - - - - - - - - - - - - - - - - -
 `

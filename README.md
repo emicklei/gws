@@ -5,11 +5,12 @@
 ## features
 
 - retrieve list of users
-- retrieve list of groups
-- retrieve membership of a user
-- retrieve members of a group
 - show details of user
+- retrieve membership of a user
+- retrieve list of groups
+- retrieve members of a group
 - show details of group
+- retrieve list of roles
 - any command can produce JSON format using `-json` at the end of the command
 
 ## examples
@@ -23,7 +24,7 @@
     gdom group members all@company.com
     gdom group info all@company.com
     
-    gdom reset
+    gdom role assignments _SEED_ADMIN_ROLE
 
 ## requirements
 
@@ -53,5 +54,9 @@ See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 This installation requires the Go SDK (1.13+).
 
     go install github.com/emicklei/gdom
+
+## help
+
+Have problems using *gdom* ? Read about [known errors](/errors.md)
 
 &copy; 2019, ernestmicklei.com. MIT License. Contributions welcome.

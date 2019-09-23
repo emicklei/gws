@@ -37,7 +37,9 @@ func newAuthClient() *http.Client {
 	// https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 	config, err := google.ConfigFromJSON(b,
 		admin.AdminDirectoryGroupReadonlyScope,
-		admin.AdminDirectoryUserReadonlyScope)
+		admin.AdminDirectoryUserReadonlyScope,
+		admin.AdminDirectoryRolemanagementReadonlyScope,
+	)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)
 	}
@@ -90,7 +92,7 @@ func tokenFromFile(file string) (*oauth2.Token, error) {
 
 // Saves a token to a file path.
 func saveToken(path string, token *oauth2.Token) {
-	fmt.Printf("Saving credential file to: %s\n", path)
+	fmt.Printf("Saving authorisation file to: %s\n", path)
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		log.Fatalf("Unable to cache oauth token: %v", err)
