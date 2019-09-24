@@ -1,5 +1,7 @@
 # gsuite - command line tool to use the Google G Suite Admin SDK
 
+[![Build Status](https://travis-ci.org/emicklei/gsuite.png)](https://travis-ci.org/emicklei/gsuite)
+
 ## features
 
 - retrieve list of users
