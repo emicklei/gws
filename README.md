@@ -25,7 +25,7 @@
     gsuite group info all@company.com
     
     gsuite role list
-    gsuite role assignments _SEED_ADMIN_ROLE
+    gsuite role assignments _USER_MANAGEMENT_ADMIN_ROLE
 
 ## requirements
 

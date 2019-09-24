@@ -37,6 +37,10 @@ List the available roles to manage.
 
 	gsuite role list
 
+List the users who have the administration role
+
+	gsuite role assignments _USER_MANAGEMENT_ADMIN_ROLE
+
 See full documentation on https://github.com/emicklei/gsuite
 - - - - - - - - - - - - - - - - - - - -
 `
