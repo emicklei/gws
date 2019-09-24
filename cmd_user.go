@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"sync"
 
 	"github.com/urfave/cli"
 	admin "google.golang.org/api/admin/directory/v1"
@@ -44,6 +45,12 @@ func cmdUserMembershipList(c *cli.Context) error {
 		return fmt.Errorf("unable to retrieve directory client %v", err)
 	}
 
+	// visit all groups and check membership
+	memberKey := c.Args().Get(0)
+	if len(memberKey) == 0 {
+		return fmt.Errorf("missing user email in command")
+	}
+
 	done := showSpinnerWhile(c)
 
 	// get all groups
@@ -58,28 +65,46 @@ func cmdUserMembershipList(c *cli.Context) error {
 		return fmt.Errorf("unable to retrieve groups in domain: %v", err)
 	}
 
-	// visit all groups and check membership
-	memberKey := c.Args().Get(0)
-	if len(memberKey) == 0 {
-		return fmt.Errorf("missing user email in command")
-	}
+	checks := make(chan memberCheck)
+	wg := new(sync.WaitGroup)
 
-	membership := []*admin.Group{}
 	for _, g := range r.Groups {
-		// Email or immutable ID of the group
-		groupKey := g.Id
 		if c.GlobalBool("v") {
 			log.Printf("[gsuite] is %s member of group %s ?\n", memberKey, g.Email)
 		}
-		hasResult, err := srv.Members.HasMember(groupKey, memberKey).Do()
-		if err != nil {
-			return fmt.Errorf("unable to check membership of [%s] in [%s] because [%v]", memberKey, groupKey, err)
-		}
-		if hasResult.IsMember {
-			membership = append(membership, g)
-		}
+		wg.Add(1)
+		go func(check memberCheck) {
+			// Use Email or immutable ID of the group
+			hasResult, err := srv.Members.HasMember(check.group.Id, check.memberKey).Do()
+			if err != nil {
+				check.callError = fmt.Errorf("unable to check membership of [%s] in [%s] because [%v]", memberKey, check.group.Id, err)
+			} else {
+				check.isMember = hasResult.IsMember
+			}
+			checks <- check
+			wg.Done()
+		}(memberCheck{
+			memberKey: memberKey,
+			group:     g,
+		})
 	}
-	done()
+	// collect memberships
+	membership := []*admin.Group{}
+	go func() {
+		for each := range checks {
+			if each.callError != nil {
+				log.Println(each.callError)
+			} else {
+				if each.isMember {
+					membership = append(membership, each.group)
+				}
+			}
+		}
+	}()
+	wg.Wait()
+	close(checks)
+
+	done() // end spinner
 
 	if optionJSON(c, membership) {
 		return nil
@@ -89,6 +114,13 @@ func cmdUserMembershipList(c *cli.Context) error {
 		fmt.Println(g.Email)
 	}
 	return nil
+}
+
+type memberCheck struct {
+	memberKey string
+	isMember  bool
+	group     *admin.Group
+	callError error
 }
 
 func cmdUserInfo(c *cli.Context) error {
