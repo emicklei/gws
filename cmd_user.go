@@ -65,7 +65,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 		return fmt.Errorf("unable to retrieve groups in domain: %v", err)
 	}
 
-	checks := make(chan memberCheck)
+	checks := make(chan memberCheck, len(r.Groups))
 	wg := new(sync.WaitGroup)
 
 	for _, g := range r.Groups {
@@ -88,21 +88,20 @@ func cmdUserMembershipList(c *cli.Context) error {
 			group:     g,
 		})
 	}
-	// collect memberships
-	membership := []*admin.Group{}
-	go func() {
-		for each := range checks {
-			if each.callError != nil {
-				log.Println(each.callError)
-			} else {
-				if each.isMember {
-					membership = append(membership, each.group)
-				}
-			}
-		}
-	}()
+
 	wg.Wait()
 	close(checks)
+	// collect memberships
+	membership := []*admin.Group{}
+	for each := range checks {
+		if each.callError != nil {
+			return each.callError
+		} else {
+			if each.isMember {
+				membership = append(membership, each.group)
+			}
+		}
+	}
 
 	done() // end spinner
 
