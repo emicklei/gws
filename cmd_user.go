@@ -77,7 +77,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 			// Use Email or immutable ID of the group
 			hasResult, err := srv.Members.HasMember(check.group.Id, check.memberKey).Do()
 			if err != nil {
-				check.callError = fmt.Errorf("unable to check membership of [%s] in [%s] because [%v]", memberKey, check.group.Id, err)
+				check.callError = fmt.Errorf("unable to check membership of [email:%s] in [group:%s] because [%v]", memberKey, check.group.Email, err)
 			} else {
 				check.isMember = hasResult.IsMember
 			}
@@ -95,6 +95,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 	membership := []*admin.Group{}
 	for each := range checks {
 		if each.callError != nil {
+			// fmt.Fprintf(os.Stderr, "%v\n", each.callError)
 			return each.callError
 		} else {
 			if each.isMember {
@@ -138,7 +139,7 @@ func cmdUserInfo(c *cli.Context) error {
 
 	r, err := srv.Users.Get(userKey).Do()
 	if err != nil {
-		return fmt.Errorf("unable to retrieve user [%s] because: %v", userKey, err)
+		return fmt.Errorf("unable to retrieve [user:%s] because: %v", userKey, err)
 	}
 	if optionJSON(c, r) {
 		return nil

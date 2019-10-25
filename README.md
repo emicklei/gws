@@ -4,14 +4,16 @@
 
 ## features
 
-- retrieve list of users
-- show details of user
-- retrieve membership of a user
-- retrieve list of groups
-- retrieve members of a group
-- show details of group
-- retrieve list of roles
-- any command can produce JSON format using `-json` at the end of the command
+- list of users
+- details of a user
+- membership of a user
+- list of groups
+- members of a group
+- details of a group
+- list of roles
+- user assignments of a role
+
+Any command can produce JSON format using `-json` at the end of the command.
 
 ## examples
 
@@ -26,6 +28,8 @@
     
     gsuite role list
     gsuite role assignments _USER_MANAGEMENT_ADMIN_ROLE
+
+    gsuite examples
 
 ## requirements
 
