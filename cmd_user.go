@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strings"
 	"sync"
 
 	"github.com/urfave/cli"
@@ -49,6 +50,13 @@ func cmdUserMembershipList(c *cli.Context) error {
 	memberKey := c.Args().Get(0)
 	if len(memberKey) == 0 {
 		return fmt.Errorf("missing user email in command")
+	}
+	if strings.Index(memberKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		memberKey = fmt.Sprintf("%s@%s", memberKey, domain)
 	}
 
 	done := showSpinnerWhile(c)
@@ -135,6 +143,13 @@ func cmdUserInfo(c *cli.Context) error {
 	userKey := c.Args().Get(0)
 	if len(userKey) == 0 {
 		return fmt.Errorf("missing user email in command")
+	}
+	if strings.Index(userKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		userKey = fmt.Sprintf("%s@%s", userKey, domain)
 	}
 
 	r, err := srv.Users.Get(userKey).Do()

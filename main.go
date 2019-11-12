@@ -155,6 +155,34 @@ func newApp() *cli.App {
 				return cmdShowExamples(c)
 			},
 		},
+		{
+			Name:  "domains",
+			Usage: "Retrieving information related to domains",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "Show list of all domains",
+					Flags: []cli.Flag{
+						cli.IntFlag{
+							Name:  "limit",
+							Usage: "-limit 10",
+						},
+						format,
+					},
+					Action: func(c *cli.Context) error {
+						return cmdDomainList(c)
+					},
+					ArgsUsage: `role list`,
+				},
+			},
+		},
+		{
+			Name:  "examples",
+			Usage: "Show examples of how to use gsuite.",
+			Action: func(c *cli.Context) error {
+				return cmdShowExamples(c)
+			},
+		},
 	}
 	return app
 }

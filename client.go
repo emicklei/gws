@@ -32,13 +32,15 @@ func newAuthClient() *http.Client {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
 
-	// If modifying these scopes, delete your previously saved token.json.
+	// After modifying these scopes, delete your previously saved token.json.
+	// TODO verify saved token against this list
 	// https://developers.google.com/identity/protocols/googlescopes
 	// https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 	config, err := google.ConfigFromJSON(b,
 		admin.AdminDirectoryGroupReadonlyScope,
 		admin.AdminDirectoryUserReadonlyScope,
 		admin.AdminDirectoryRolemanagementReadonlyScope,
+		admin.AdminDirectoryDomainReadonlyScope,
 	)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)

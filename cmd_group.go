@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/urfave/cli"
 	admin "google.golang.org/api/admin/directory/v1"
@@ -45,6 +46,14 @@ func cmdGroupMembers(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
+	}
+
 	r, err := srv.Members.List(groupKey).Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve members of group [%s] : %v", groupKey, err)
@@ -71,6 +80,13 @@ func cmdGroupInfo(c *cli.Context) error {
 	groupKey := c.Args().Get(0)
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
+	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
 	}
 
 	r, err := srv.Groups.Get(groupKey).Do()

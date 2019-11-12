@@ -12,6 +12,7 @@
 - details of a group
 - list of roles
 - user assignments of a role
+- list of domains
 
 Any command can produce JSON format using `-json` at the end of the command.
 
@@ -19,15 +20,21 @@ Any command can produce JSON format using `-json` at the end of the command.
 
     gsuite user list
     gsuite user list -limit 4
+    gsuite user membership john.doe
     gsuite user membership john.doe@company.com
+    gsuite user info john.doe
     gsuite user info john.doe@company.com
 
     gsuite group list    
+    gsuite group members all
     gsuite group members all@company.com
+    gsuite group info all
     gsuite group info all@company.com
     
     gsuite role list
     gsuite role assignments _USER_MANAGEMENT_ADMIN_ROLE
+
+    gsuite domain list
 
     gsuite examples
 
@@ -52,6 +59,7 @@ You will be asked to accept those on the first time you use *gsuite*.
 - https://www.googleapis.com/auth/admin.directory.group.member.readonly
 - https://www.googleapis.com/auth/admin.directory.user.readonly
 - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
+- https://www.googleapis.com/auth/admin.directory.domain.readonly
 
 See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
