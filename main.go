@@ -77,6 +77,15 @@ func newApp() *cli.App {
 					Flags:     []cli.Flag{format},
 					ArgsUsage: `user info john.doe@company.com`,
 				},
+				{
+					Name:  "aliases",
+					Usage: "Show the aliases of a user",
+					Action: func(c *cli.Context) error {
+						return cmdUserAlias(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `user aliases john.doe@company.com`,
+				},
 			},
 		},
 		{

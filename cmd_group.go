@@ -18,7 +18,7 @@ func cmdGroupList(c *cli.Context) error {
 	}
 
 	r, err := srv.Groups.List().
-		Customer("my_customer"). // ??
+		Customer(myAccoutsCustomerId).
 		MaxResults(int64(IfZero(c.Int("limit"), 100))).
 		OrderBy("email").Do()
 	if err != nil {

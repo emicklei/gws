@@ -24,6 +24,7 @@ Any command can produce JSON format using `-json` at the end of the command.
     gsuite user membership john.doe@company.com
     gsuite user info john.doe
     gsuite user info john.doe@company.com
+    gsuite user aliases john.doe@company.com
 
     gsuite group list    
     gsuite group members all

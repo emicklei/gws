@@ -10,6 +10,10 @@ import (
 	"github.com/urfave/cli"
 )
 
+// https://developers.google.com/admin-sdk/directory/v1/reference/groups/list
+// As an account administrator, you can also use the my_customer alias to represent your account's customerId.
+const myAccoutsCustomerId = "my_customer"
+
 func IfZero(i, j int) int {
 	if i == 0 {
 		return j

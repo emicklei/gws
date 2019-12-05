@@ -20,7 +20,7 @@ func cmdUserList(c *cli.Context) error {
 	}
 
 	r, err := srv.Users.List().
-		Customer("my_customer"). // ??
+		Customer(myAccoutsCustomerId).
 		MaxResults(int64(IfZero(c.Int("limit"), 100))).
 		OrderBy("email").Do()
 	if err != nil {
@@ -66,7 +66,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 		log.Println("[gsuite] fetching all groups")
 	}
 	r, err := srv.Groups.List().
-		Customer("my_customer"). // ??
+		Customer(myAccoutsCustomerId).
 		MaxResults(int64(IfZero(c.Int("limit"), 100))).
 		OrderBy("email").Do()
 	if err != nil {
@@ -85,7 +85,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 			// Use Email or immutable ID of the group
 			hasResult, err := srv.Members.HasMember(check.group.Id, check.memberKey).Do()
 			if err != nil {
-				check.callError = fmt.Errorf("unable to check membership of [email:%s] in [group:%s] because [%v]", memberKey, check.group.Email, err)
+				check.callError = fmt.Errorf("aborting! unable to check membership of [email:%s] in [group:%s] because [%v]", memberKey, check.group.Email, err)
 			} else {
 				check.isMember = hasResult.IsMember
 			}
@@ -101,18 +101,22 @@ func cmdUserMembershipList(c *cli.Context) error {
 	close(checks)
 	// collect memberships
 	membership := []*admin.Group{}
+	var abortError error = nil
 	for each := range checks {
-		if each.callError != nil {
-			// fmt.Fprintf(os.Stderr, "%v\n", each.callError)
-			return each.callError
-		} else {
-			if each.isMember {
-				membership = append(membership, each.group)
+		if abortError == nil {
+			if each.callError != nil {
+				abortError = each.callError
+			} else {
+				if each.isMember {
+					membership = append(membership, each.group)
+				}
 			}
 		}
 	}
-
 	done() // end spinner
+	if abortError != nil {
+		return abortError
+	}
 
 	if optionJSON(c, membership) {
 		return nil
@@ -160,5 +164,37 @@ func cmdUserInfo(c *cli.Context) error {
 		return nil
 	}
 	fmt.Printf("%s (%s) [tel: %s, 2nd: %s, suspended: %v]\n", r.PrimaryEmail, r.Name.FullName, r.RecoveryPhone, r.RecoveryEmail, r.Suspended)
+	return nil
+}
+
+func cmdUserAlias(c *cli.Context) error {
+
+	client := sharedAuthClient()
+
+	srv, err := admin.New(client)
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %v", err)
+	}
+
+	userKey := c.Args().Get(0)
+	if len(userKey) == 0 {
+		return fmt.Errorf("missing user email in command")
+	}
+	if strings.Index(userKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		userKey = fmt.Sprintf("%s@%s", userKey, domain)
+	}
+
+	r, err := srv.Users.Aliases.List(userKey).Do()
+	if err != nil {
+		return fmt.Errorf("unable to retrieve [user:%s] because: %v", userKey, err)
+	}
+	if optionJSON(c, r) {
+		return nil
+	}
+	fmt.Printf("%v\n", r)
 	return nil
 }
