@@ -192,7 +192,7 @@ func newApp() *cli.App {
 			},
 		},
 		{
-			Name:  "domains",
+			Name:  "domain",
 			Usage: "Retrieving information related to domains",
 			Subcommands: []cli.Command{
 				{
@@ -208,7 +208,7 @@ func newApp() *cli.App {
 					Action: func(c *cli.Context) error {
 						return cmdDomainList(c)
 					},
-					ArgsUsage: `role list`,
+					ArgsUsage: `domein list`,
 				},
 			},
 		},
