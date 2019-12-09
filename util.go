@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/tj/go-spin"
@@ -54,4 +56,17 @@ func optionJSON(c *cli.Context, v interface{}) bool {
 		fmt.Println(string(data))
 	}
 	return wantsJSON
+}
+
+func promptForYes(c *cli.Context, message string) bool {
+
+	// Don't prompt for confirmation if the quiet flag is enabled
+	if c.GlobalBool("quiet") {
+		return true
+	}
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print(message)
+	yn, _ := reader.ReadString('\n')
+	return strings.HasPrefix(yn, "Y") || strings.HasPrefix(yn, "y")
 }

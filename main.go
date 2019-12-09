@@ -123,7 +123,34 @@ func newApp() *cli.App {
 						return cmdGroupInfo(c)
 					},
 					Flags:     []cli.Flag{format},
-					ArgsUsage: `user info all@company.com`,
+					ArgsUsage: `group info all@company.com`,
+				},
+				{
+					Name:  "delete",
+					Usage: "Delete a group",
+					Action: func(c *cli.Context) error {
+						return cmdGroupDelete(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `group delete to-be-removed@company.com`,
+				},
+				{
+					Name:  "add",
+					Usage: "Add a member to a group",
+					Action: func(c *cli.Context) error {
+						return cmdGroupAddMember(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `group add my-group new-person`,
+				},
+				{
+					Name:  "remove",
+					Usage: "Remove a member from a group",
+					Action: func(c *cli.Context) error {
+						return cmdGroupRemoveMember(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `group remove my-group new-person`,
 				},
 			},
 		},

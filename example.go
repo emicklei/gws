@@ -37,6 +37,12 @@ Show details of a group.
 	gsuite group info all
 	gsuite group info all@company.com
 
+Managing groups
+
+	gsuite group delete my-old-group
+	gsuite group add my-group important-person
+	gsuite group remove my-group important-person 
+
 List the available roles to manage.
 
 	gsuite role list
@@ -48,7 +54,6 @@ List the users who have the administration role
 List the (internet) domains that are managed
 
 	gsuite domain list
-
 
 See full documentation on https://github.com/emicklei/gsuite
 - - - - - - - - - - - - - - - - - - - -

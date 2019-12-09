@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -74,7 +75,7 @@ func cmdGroupInfo(c *cli.Context) error {
 
 	srv, err := admin.New(client)
 	if err != nil {
-		return fmt.Errorf("unable to retrieve directory client %v", err)
+		return fmt.Errorf("unable to retrieve directory client %w", err)
 	}
 
 	groupKey := c.Args().Get(0)
@@ -91,11 +92,125 @@ func cmdGroupInfo(c *cli.Context) error {
 
 	r, err := srv.Groups.Get(groupKey).Do()
 	if err != nil {
-		return fmt.Errorf("unable to retrieve group [%s] because: %v", groupKey, err)
+		return fmt.Errorf("unable to retrieve group [%s] because: %v (%T)", groupKey, err, err)
 	}
 	if optionJSON(c, r) {
 		return nil
 	}
 	fmt.Printf("%s (%s) [members=%d]\n", r.Email, r.Name, r.DirectMembersCount)
+	return nil
+}
+
+func cmdGroupDelete(c *cli.Context) error {
+	srv, err := admin.New(sharedAuthClient())
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
+	}
+	// group argument
+	groupKey := c.Args().Get(0)
+	if len(groupKey) == 0 {
+		return fmt.Errorf("missing group email in command")
+	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
+	}
+	// prompt
+	if !promptForYes(c, fmt.Sprintf("Are you sure to delete group [%s] (y/N)? ", groupKey)) {
+		return errors.New("group delete aborted")
+	}
+	// doit
+	err = srv.Groups.Delete(groupKey).Do()
+	if err != nil {
+		return fmt.Errorf("unable to delete group [%s] because: %w (%T)", groupKey, err, err)
+	}
+	return nil
+}
+
+func cmdGroupAddMember(c *cli.Context) error {
+	srv, err := admin.New(sharedAuthClient())
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
+	}
+	// group argument
+	groupKey := c.Args().Get(0)
+	if len(groupKey) == 0 {
+		return fmt.Errorf("missing group email in command")
+	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
+	}
+	// user argument
+	userKey := c.Args().Get(1)
+	if len(userKey) == 0 {
+		return fmt.Errorf("missing user email in command")
+	}
+	if strings.Index(userKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		userKey = fmt.Sprintf("%s@%s", userKey, domain)
+	}
+	// prompt
+	if !promptForYes(c, fmt.Sprintf("Are you sure to add member [%s] to group [%s] (y/N)? ", userKey, groupKey)) {
+		return errors.New("group add aborted")
+	}
+	// doit
+	member := &admin.Member{
+		Email: userKey,
+	}
+	_, err = srv.Members.Insert(groupKey, member).Do()
+	if err != nil {
+		return fmt.Errorf("unable to add member [%s] to group [%s] because: %w (%T)", userKey, groupKey, err, err)
+	}
+	return nil
+}
+
+func cmdGroupRemoveMember(c *cli.Context) error {
+	srv, err := admin.New(sharedAuthClient())
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
+	}
+	// group argument
+	groupKey := c.Args().Get(0)
+	if len(groupKey) == 0 {
+		return fmt.Errorf("missing group email in command")
+	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
+	}
+	// member argument
+	userKey := c.Args().Get(1)
+	if len(userKey) == 0 {
+		return fmt.Errorf("missing user email in command")
+	}
+	if strings.Index(userKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		userKey = fmt.Sprintf("%s@%s", userKey, domain)
+	}
+	// prompt
+	if !promptForYes(c, fmt.Sprintf("Are you sure to remove member [%s] from group [%s] (y/N)? ", userKey, groupKey)) {
+		return errors.New("group remove aborted")
+	}
+	// doit
+	err = srv.Members.Delete(groupKey, userKey).Do()
+	if err != nil {
+		return fmt.Errorf("unable to remove member [%s] from group [%s] because: %w (%T)", userKey, groupKey, err, err)
+	}
 	return nil
 }

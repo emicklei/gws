@@ -41,6 +41,8 @@ func newAuthClient() *http.Client {
 		admin.AdminDirectoryUserReadonlyScope,
 		admin.AdminDirectoryRolemanagementReadonlyScope,
 		admin.AdminDirectoryDomainReadonlyScope,
+		// Editor
+		admin.AdminDirectoryGroupScope,
 	)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)
