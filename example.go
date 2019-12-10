@@ -39,9 +39,10 @@ Show details of a group.
 
 Managing groups
 
+	gsuite group create brand-new-group
 	gsuite group delete my-old-group
-	gsuite group add my-group important-person
-	gsuite group remove my-group important-person 
+	gsuite group add my-group john.doe
+	gsuite group remove my-group john.doe
 
 List the available roles to manage.
 

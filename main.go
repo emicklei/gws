@@ -126,6 +126,15 @@ func newApp() *cli.App {
 					ArgsUsage: `group info all@company.com`,
 				},
 				{
+					Name:  "create",
+					Usage: "Create a group",
+					Action: func(c *cli.Context) error {
+						return cmdGroupCreate(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `create brand-new@company.com`,
+				},
+				{
 					Name:  "delete",
 					Usage: "Delete a group",
 					Action: func(c *cli.Context) error {

@@ -127,6 +127,7 @@ func cmdGroupDelete(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to delete group [%s] because: %w (%T)", groupKey, err, err)
 	}
+	fmt.Printf("deleted group [%s]/n", groupKey)
 	return nil
 }
 
@@ -171,6 +172,7 @@ func cmdGroupAddMember(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to add member [%s] to group [%s] because: %w (%T)", userKey, groupKey, err, err)
 	}
+	fmt.Printf("added member [%s] to group [%s]/n", userKey, groupKey)
 	return nil
 }
 
@@ -212,5 +214,38 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to remove member [%s] from group [%s] because: %w (%T)", userKey, groupKey, err, err)
 	}
+	fmt.Printf("removed member [%s] from group [%s]/n", userKey, groupKey)
+	return nil
+}
+
+func cmdGroupCreate(c *cli.Context) error {
+	srv, err := admin.New(sharedAuthClient())
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
+	}
+	// group argument
+	groupKey := c.Args().Get(0)
+	if len(groupKey) == 0 {
+		return fmt.Errorf("missing group email in command")
+	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
+	}
+	// doit
+	grp := &admin.Group{
+		Email: groupKey,
+	}
+	r, err := srv.Groups.Insert(grp).Do()
+	if err != nil {
+		return fmt.Errorf("unable to create group [%s] because: %w (%T)", groupKey, err, err)
+	}
+	if optionJSON(c, r) {
+		return nil
+	}
+	fmt.Printf("created group [%s]/n", groupKey)
 	return nil
 }

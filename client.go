@@ -37,7 +37,6 @@ func newAuthClient() *http.Client {
 	// https://developers.google.com/identity/protocols/googlescopes
 	// https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 	config, err := google.ConfigFromJSON(b,
-		admin.AdminDirectoryGroupReadonlyScope,
 		admin.AdminDirectoryUserReadonlyScope,
 		admin.AdminDirectoryRolemanagementReadonlyScope,
 		admin.AdminDirectoryDomainReadonlyScope,

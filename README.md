@@ -31,6 +31,8 @@ Any command can produce JSON format using `-json` at the end of the command.
     gsuite group members all@company.com
     gsuite group info all
     gsuite group info all@company.com
+    
+    gsuite group create my-old@company.com
     gsuite group delete my-old@company.com
     gsuite group add my-group this-person
     gsuite group remove my-group this-person
@@ -60,7 +62,7 @@ Any command can produce JSON format using `-json` at the end of the command.
 *gsuite* requires the following authentication scopes to be consent per user.
 You will be asked to accept those on the first time you use *gsuite*.
 
-- https://www.googleapis.com/auth/admin.directory.group.member.readonly
+- https://www.googleapis.com/auth/admin.directory.group
 - https://www.googleapis.com/auth/admin.directory.user.readonly
 - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
 - https://www.googleapis.com/auth/admin.directory.domain.readonly
