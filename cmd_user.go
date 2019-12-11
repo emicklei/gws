@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -20,8 +21,8 @@ func cmdUserList(c *cli.Context) error {
 	}
 
 	r, err := srv.Users.List().
-		Customer(myAccoutsCustomerId).
-		MaxResults(int64(IfZero(c.Int("limit"), 100))).
+		Customer(myAccoutsCustomerID).
+		MaxResults(int64(ifZero(c.Int("limit"), 100))).
 		OrderBy("email").Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve users in domain: %v", err)
@@ -66,8 +67,8 @@ func cmdUserMembershipList(c *cli.Context) error {
 		log.Println("[gsuite] fetching all groups")
 	}
 	r, err := srv.Groups.List().
-		Customer(myAccoutsCustomerId).
-		MaxResults(int64(IfZero(c.Int("limit"), 100))).
+		Customer(myAccoutsCustomerID).
+		MaxResults(int64(ifZero(c.Int("limit"), 100))).
 		OrderBy("email").Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve groups in domain: %v", err)
@@ -196,5 +197,33 @@ func cmdUserAlias(c *cli.Context) error {
 		return nil
 	}
 	fmt.Printf("%v\n", r)
+	return nil
+}
+
+func cmdUserSuspend(c *cli.Context) error {
+	srv, err := admin.New(sharedAuthClient())
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %v", err)
+	}
+	// user
+	userKey, err := userKey(c)
+	if err != nil {
+		return err
+	}
+	reason := c.Args().Get(1)
+
+	// prompt
+	if !promptForYes(c, fmt.Sprintf("Are you sure to suspend user [%s] because [%s] (y/N)? ", userKey, reason)) {
+		return errors.New("user suspend aborted")
+	}
+
+	user := &admin.User{
+		Suspended:        true,
+		SuspensionReason: reason,
+	}
+	_, err = srv.Users.Patch(userKey, user).Do()
+	if err != nil {
+		return fmt.Errorf("unable to suspend [user:%s] because: %v", userKey, err)
+	}
 	return nil
 }

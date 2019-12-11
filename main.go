@@ -86,6 +86,15 @@ func newApp() *cli.App {
 					Flags:     []cli.Flag{format},
 					ArgsUsage: `user aliases john.doe@company.com`,
 				},
+				{
+					Name:  "suspend",
+					Usage: "Suspend the user providing a reason",
+					Action: func(c *cli.Context) error {
+						return cmdUserSuspend(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `user suspend john.doe@company.com "left the company"`,
+				},
 			},
 		},
 		{

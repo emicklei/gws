@@ -7,9 +7,7 @@
 - list of users
 - details of a user
 - membership of a user
-- list of groups
-- members of a group
-- details of a group
+- management of groups
 - list of roles
 - user assignments of a role
 - list of domains
@@ -25,6 +23,7 @@ Any command can produce JSON format using `-json` at the end of the command.
     gsuite user info john.doe
     gsuite user info john.doe@company.com
     gsuite user aliases john.doe@company.com
+    gsuite user suspend angelina "retired"
 
     gsuite group list    
     gsuite group members all

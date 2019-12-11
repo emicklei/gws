@@ -23,6 +23,10 @@ Show details of a user.
 	gsuite user info john.doe
 	gsuite user info john.doe@company.com
 
+Manage users
+
+	gsuite user suspend martin "left the company"
+
 List the email address of all groups
 
 	gsuite group list

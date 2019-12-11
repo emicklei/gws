@@ -17,7 +17,7 @@ func cmdRoleList(c *cli.Context) error {
 	}
 
 	// TODO my_customer?
-	roles, err := srv.Roles.List(myAccoutsCustomerId).MaxResults(int64(IfZero(c.Int("limit"), 100))).Do()
+	roles, err := srv.Roles.List(myAccoutsCustomerID).MaxResults(int64(ifZero(c.Int("limit"), 100))).Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve roles in domain: %v", err)
 	}
@@ -41,7 +41,7 @@ func cmdRoleAssignment(c *cli.Context) error {
 
 	// Get all roles
 	// TODO my_customer?
-	roles, err := srv.Roles.List(myAccoutsCustomerId).Do()
+	roles, err := srv.Roles.List(myAccoutsCustomerID).Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve roles in domain: %v", err)
 	}
@@ -57,7 +57,7 @@ func cmdRoleAssignment(c *cli.Context) error {
 	}
 
 	// find all assigments per role
-	ass, err := srv.RoleAssignments.List(myAccoutsCustomerId).RoleId(strconv.FormatInt(roleID, 10)).Do()
+	ass, err := srv.RoleAssignments.List(myAccoutsCustomerID).RoleId(strconv.FormatInt(roleID, 10)).Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve roles in domain: %v", err)
 	}

@@ -17,7 +17,7 @@ func cmdDomainList(c *cli.Context) error {
 		return fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
 
-	r, err := srv.Domains.List(myAccoutsCustomerId).Do()
+	r, err := srv.Domains.List(myAccoutsCustomerID).Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve domains: %v", err)
 	}
@@ -38,7 +38,7 @@ func primaryDomain() (string, error) {
 		return "", fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
 
-	r, err := srv.Domains.List(myAccoutsCustomerId).Do()
+	r, err := srv.Domains.List(myAccoutsCustomerID).Do()
 	if err != nil {
 		return "", fmt.Errorf("unable to retrieve domains: %v", err)
 	}

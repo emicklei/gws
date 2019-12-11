@@ -19,8 +19,8 @@ func cmdGroupList(c *cli.Context) error {
 	}
 
 	r, err := srv.Groups.List().
-		Customer(myAccoutsCustomerId).
-		MaxResults(int64(IfZero(c.Int("limit"), 100))).
+		Customer(myAccoutsCustomerID).
+		MaxResults(int64(ifZero(c.Int("limit"), 100))).
 		OrderBy("email").Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve groups in domain: %v", err)
@@ -127,7 +127,7 @@ func cmdGroupDelete(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to delete group [%s] because: %w (%T)", groupKey, err, err)
 	}
-	fmt.Printf("deleted group [%s]/n", groupKey)
+	fmt.Printf("deleted group [%s]\n", groupKey)
 	return nil
 }
 
@@ -172,7 +172,7 @@ func cmdGroupAddMember(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to add member [%s] to group [%s] because: %w (%T)", userKey, groupKey, err, err)
 	}
-	fmt.Printf("added member [%s] to group [%s]/n", userKey, groupKey)
+	fmt.Printf("added member [%s] to group [%s]\n", userKey, groupKey)
 	return nil
 }
 
@@ -214,7 +214,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to remove member [%s] from group [%s] because: %w (%T)", userKey, groupKey, err, err)
 	}
-	fmt.Printf("removed member [%s] from group [%s]/n", userKey, groupKey)
+	fmt.Printf("removed member [%s] from group [%s]\n", userKey, groupKey)
 	return nil
 }
 
@@ -246,6 +246,6 @@ func cmdGroupCreate(c *cli.Context) error {
 	if optionJSON(c, r) {
 		return nil
 	}
-	fmt.Printf("created group [%s]/n", groupKey)
+	fmt.Printf("created group [%s]\n", groupKey)
 	return nil
 }
