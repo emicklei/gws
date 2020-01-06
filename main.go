@@ -35,6 +35,10 @@ func newApp() *cli.App {
 			Name:  "verbose, v",
 			Usage: "verbose logging",
 		},
+		cli.StringFlag{
+			Name:  "domain",
+			Usage: "filter by domain",
+		},
 	}
 	format := cli.BoolFlag{
 		Name:  "json, JSON",
@@ -228,13 +232,6 @@ func newApp() *cli.App {
 					},
 					ArgsUsage: `domein list`,
 				},
-			},
-		},
-		{
-			Name:  "examples",
-			Usage: "Show examples of how to use gsuite.",
-			Action: func(c *cli.Context) error {
-				return cmdShowExamples(c)
 			},
 		},
 	}

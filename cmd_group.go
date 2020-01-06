@@ -18,10 +18,14 @@ func cmdGroupList(c *cli.Context) error {
 		return fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
 
-	r, err := srv.Groups.List().
+	call := srv.Groups.List().
 		Customer(myAccoutsCustomerID).
 		MaxResults(int64(ifZero(c.Int("limit"), 100))).
-		OrderBy("email").Do()
+		OrderBy("email")
+	if domain := c.GlobalString("domain"); len(domain) > 0 {
+		call = call.Domain(domain)
+	}
+	r, err := call.Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve groups in domain: %v", err)
 	}
