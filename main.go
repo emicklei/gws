@@ -160,7 +160,7 @@ func newApp() *cli.App {
 					Name:  "add",
 					Usage: "Add a member to a group",
 					Action: func(c *cli.Context) error {
-						return cmdGroupAddMember(c)
+						return cmdGroupAddMembers(c)
 					},
 					Flags:     []cli.Flag{format},
 					ArgsUsage: `group add my-group new-person`,

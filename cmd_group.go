@@ -135,6 +135,7 @@ func cmdGroupDelete(c *cli.Context) error {
 	return nil
 }
 
+// deprecated
 func cmdGroupAddMember(c *cli.Context) error {
 	srv, err := admin.New(sharedAuthClient())
 	if err != nil {
@@ -177,6 +178,60 @@ func cmdGroupAddMember(c *cli.Context) error {
 		return fmt.Errorf("unable to add member [%s] to group [%s] because: %w (%T)", userKey, groupKey, err, err)
 	}
 	fmt.Printf("added member [%s] to group [%s]\n", userKey, groupKey)
+	return nil
+}
+
+func cmdGroupAddMembers(c *cli.Context) error {
+	srv, err := admin.New(sharedAuthClient())
+	if err != nil {
+		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
+	}
+	// group argument
+	groupKey := c.Args().Get(0)
+	if len(groupKey) == 0 {
+		return fmt.Errorf("missing group email in command")
+	}
+	if strings.Index(groupKey, "@") == -1 {
+		domain, err := primaryDomain()
+		if err != nil {
+			return err
+		}
+		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
+	}
+	// users argument
+	userArgument := c.Args().Get(1)
+	if len(userArgument) == 0 {
+		return fmt.Errorf("missing user(s) email in command")
+	}
+	userKeys := []string{}
+	for _, each := range strings.Split(userArgument, ",") {
+		userKey := each
+		if strings.Index(each, "@") == -1 {
+			domain, err := primaryDomain()
+			if err != nil {
+				return err
+			}
+			userKey = fmt.Sprintf("%s@%s", each, domain)
+		}
+		userKeys = append(userKeys, userKey)
+	}
+	// prompt
+	if !promptForYes(c, fmt.Sprintf("Are you sure to add member(s) [%s] to group [%s] (y/N)? ", userArgument, groupKey)) {
+		return errors.New("group add aborted")
+	}
+	for _, each := range userKeys {
+		// doit
+		member := &admin.Member{
+			Email: each,
+		}
+		_, err = srv.Members.Insert(groupKey, member).Do()
+		if err != nil {
+			// TODO: show different log when *googleapi.Error=&{409 Member already exists.
+			fmt.Printf("unable to add member [%s] to group [%s] because: %v (%T)\n", each, groupKey, err, err)
+			continue
+		}
+		fmt.Printf("added member [%s] to group [%s]\n", each, groupKey)
+	}
 	return nil
 }
 
