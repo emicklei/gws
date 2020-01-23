@@ -174,6 +174,15 @@ func newApp() *cli.App {
 					Flags:     []cli.Flag{format},
 					ArgsUsage: `group remove my-group new-person`,
 				},
+				{
+					Name:  "export",
+					Usage: "Export all groups with all members",
+					Action: func(c *cli.Context) error {
+						return cmdExportGroupMemberships(c)
+					},
+					Flags:     []cli.Flag{format},
+					ArgsUsage: `group export`,
+				},
 			},
 		},
 		{

@@ -1,0 +1,587 @@
+{
+	"all@kramphub.com": [
+		"aha.io@kramphub.com",
+		"cd-pipeline@kramphub.com",
+		"eric@kramphub.com",
+		"jelmer@kramphub.com",
+		"koray@kramphub.com",
+		"mahmut@kramphub.com",
+		"ramon@kramphub.com",
+		"robert@kramphub.com"
+	],
+	"anchormen-datahub@kramphub.com": [
+		"b.jacobs@anchormen.nl",
+		"h.queiroz@anchormen.nl",
+		"m.dubovik@anchormen.nl",
+		"s.sattari@anchormen.nl",
+		"y.kontzopoulou@anchormen.nl"
+	],
+	"billing-viewers@kramphub.com": [
+		"ewoud.vandijk@kramp.com",
+		"rene.williams@kramp.com"
+	],
+	"bouncer-golive@kramphub.com": [
+		"arvind@kramphub.com",
+		"bouncer-tester@kramphub.com",
+		"edward@kramphub.com",
+		"edwindia@kramphub.com",
+		"joey@kramphub.com",
+		"niranjan.shriram@kramp.com",
+		"niranjan@kramphub.com",
+		"niranjangowda25@gmail.com",
+		"radek@kramphub.com",
+		"robert@kramphub.com",
+		"ron@kramphub.com",
+		"team-asterix@kramphub.com"
+	],
+	"classroom_teachers@kramphub.com": [],
+	"coreteam-maykers@maykers.com": [
+		"alexander.ketelaar@kramp.com",
+		"arjen@maykers.com",
+		"derick.mekking@maykers.com",
+		"francine.nielander@maykers.com",
+		"inez.coumans@maykers.com",
+		"jazzy.lobato@maykers.com",
+		"jerome.hermans@maykers.com",
+		"paul.wissing@maykers.com",
+		"rozemarijn.karsemeijer@maykers.com"
+	],
+	"coreteam@kramphub.com": [
+		"alexander.ketelaar@kramp.com",
+		"arjen@kramphub.com",
+		"derick@kramphub.com",
+		"francine@kramphub.com",
+		"inez@kramphub.com",
+		"jazzy@kramphub.com",
+		"jerome.hermans@kramp.com",
+		"paul@kramphub.com",
+		"rozemarijn@kramphub.com"
+	],
+	"data-analytics@maykers.com": [
+		"rozemarijn.karsemeijer@maykers.com",
+		"rozemarijn@kramphub.com"
+	],
+	"data-architects@kramphub.com": [
+		"rene.william@kramp.com"
+	],
+	"datahub-developers@kramphub.com": [
+		"arvind@kramphub.com",
+		"egbert@kramphub.com",
+		"jelmer@kramphub.com",
+		"marius@kramphub.com",
+		"pedro@kramphub.com",
+		"saman@kramphub.com"
+	],
+	"developers-q42@kramphub.com": [
+		"atila.akdan@polteq.com",
+		"cmvtveer@gmail.com",
+		"frank.dijk@kramp.com",
+		"inge.nahuis@kramp.com",
+		"jaapm@q42.nl",
+		"jasperh@q42.nl",
+		"jeroen@q42.nl",
+		"lotte@q42.nl",
+		"louise@q42.nl",
+		"ron.huiskamp@kramp.com"
+	],
+	"developers@kramphub.com": [
+		"aha.io@kramphub.com",
+		"arvind@kramphub.com",
+		"bart.postma@kramp.com",
+		"bas.benning@kramphub.com",
+		"casper@kramphub.com",
+		"derk@kramphub.com",
+		"edward@kramphub.com",
+		"egbert@kramphub.com",
+		"eric@kramphub.com",
+		"ernest@kramphub.com",
+		"gerben@kramphub.com",
+		"jelle@kramphub.com",
+		"jelmer@kramphub.com",
+		"joeri@kramphub.com",
+		"joey@kramphub.com",
+		"kevinberendsen@kramphub.com",
+		"koray@kramphub.com",
+		"lars@kramphub.com",
+		"marius@kramphub.com",
+		"michiel@kramphub.com",
+		"miguel@kramphub.com",
+		"naveen@kramphub.com",
+		"nima@kramphub.com",
+		"paco@kramphub.com",
+		"pedro@kramphub.com",
+		"radek@kramphub.com",
+		"rameez@kramphub.com",
+		"ramesh@kramphub.com",
+		"ramon@kramphub.com",
+		"ricardo@kramphub.com",
+		"robert@kramphub.com",
+		"saman@kramphub.com",
+		"serdar@kramphub.com",
+		"tom@kramphub.com"
+	],
+	"developers@maykers.com": [
+		"ahron@kramphub.com",
+		"arjen@maykers.com",
+		"arthur@kramphub.com",
+		"guilherme@kramphub.com",
+		"johan@kramphub.com",
+		"mariajoao@kramphub.com",
+		"sander@kramphub.com",
+		"sjoerd@kramphub.com",
+		"vadim@kramphub.com"
+	],
+	"edwindia@kramphub.com": [
+		"abdul.rahim@kramp.com",
+		"aj573520@gmail.com",
+		"arjun.chimbu.kramp@gmail.com",
+		"niranjan.shriram@kramp.com",
+		"niranjan@kramphub.com",
+		"parag.patel@kramp.com",
+		"Praveen.Jayaram@kramp.com",
+		"rakesh.shankarnarayan@kramp.com",
+		"rakesh.valappu@kramp.com",
+		"ronnie.zweers@kramp.com",
+		"shadab.ahmad@kramp.com",
+		"ujjwal.pandey@kramp.com",
+		"vadim.kalitsev@kramp.com"
+	],
+	"external@kramphub.com": [
+		"marketing-france@kramphub.com"
+	],
+	"gateway@kramphub.com": [
+		"abdul.rahim@kramp.com",
+		"arjun.chimbu.kramp@gmail.com",
+		"dorena.batha@kramp.com",
+		"edward@kramphub.com",
+		"naveen.retnakaran@kramp.com",
+		"radek@kramphub.com",
+		"rakesh.valappu@kramp.com",
+		"rameez.rahman@kramp.com",
+		"Ramesh.kakarla@kramp.com",
+		"rob.sessink@kramp.com",
+		"ronnie.zweers@kramp.com",
+		"tom@kramphub.com",
+		"vadim.kalitsev@kramp.com"
+	],
+	"guild-venom@kramphub.com": [
+		"ernest@kramphub.com",
+		"joey@kramphub.com",
+		"miguel@kramphub.com",
+		"radek@kramphub.com",
+		"vadim.kalitsev@kramp.com",
+		"vadim@kramphub.com",
+		"vlad@kramphub.com"
+	],
+	"hr@kramphub.com": [
+		"annelie@kramphub.com",
+		"inez@kramphub.com",
+		"joyce@kramphub.com"
+	],
+	"ikwilvanmijnfotoaf@kramphub.com": [
+		"dawid.barylski@kramp.com",
+		"jelmer@kramphub.com"
+	],
+	"internal@kramphub.com": [
+		"alexander@kramphub.com",
+		"arvind@kramphub.com",
+		"ernest@kramphub.com",
+		"inez@kramphub.com",
+		"radek@kramphub.com",
+		"tom@kramphub.com"
+	],
+	"kaas-admins@kramphub.com": [
+		"brian.holt@kramp.com",
+		"erik.bach-andersen@kramp.com",
+		"ersie@kramphub.com",
+		"mirte@kramphub.com",
+		"paco@kramphub.com",
+		"pernille.krogsgaard.sorensen@kramp.com",
+		"remko@kramphub.com",
+		"rozemarijn.karsemeijer@maykers.com",
+		"rozemarijn@kramphub.com"
+	],
+	"kaas-admins@maykers.com": [
+		"brian.holt@kramp.com",
+		"erik.bach-andersen@kramp.com",
+		"ersie.logothetou@maykers.com",
+		"ersie@kramphub.com",
+		"mirte.brethouwer@maykers.com",
+		"pernille.krogsgaard.sorensen@kramp.com",
+		"remko.strengholt@maykers.com",
+		"rozemarijn.karsemeijer@maykers.com"
+	],
+	"kramp-admins@kramphub.com": [
+		"rene.williams@kramp.com",
+		"vadim@kramphub.com"
+	],
+	"kramp-analytics-bigquery@kramphub.com": [
+		"sjoerd.stoffels@kramp.com"
+	],
+	"kramp-analytics@kramphub.com": [
+		"anne.woyciewski@kramp.com",
+		"ewoud.van.dijk@kramp.com",
+		"frank.dijk@kramp.com",
+		"koen.demkes@kramp.com",
+		"mirko.schuurman@kramp.com",
+		"nikki.nijenhuis@kramp.com",
+		"oliver.meisch@kramp.com",
+		"pam.van.benthem@kramp.com",
+		"peter.hendriks@kramp.com",
+		"rene.william@kramp.com"
+	],
+	"kramp-bi-administrators@kramphub.com": [
+		"andre.mateman@kramp.com",
+		"diana.nica@kramp.com",
+		"diego.cortes@kramp.com",
+		"gert.wisselink@kramp.com",
+		"nikki.nijenhuis@kramp.com",
+		"peter.hendriks@kramp.com",
+		"rene.william@kramp.com",
+		"sergey.korolev@kramp.com"
+	],
+	"kramp-billing-admins@kramphub.com": [
+		"ewoud.van.dijk@kramp.com"
+	],
+	"kramp-data-admins@kramphub.com": [
+		"peter.hendriks@kramp.com",
+		"rene.william@kramp.com"
+	],
+	"kramp-data-analysts@kramphub.com": [
+		"nikki.nijenhuis@kramp.com",
+		"pam.van.benthem@kramp.com"
+	],
+	"kramp-data-engineers@kramphub.com": [
+		"ernest@kramphub.com",
+		"jelmer@kramphub.com",
+		"nikki.nijenhuis@kramp.com",
+		"peter.hendriks@kramp.com"
+	],
+	"kramp-data-quality-analysts@kramphub.com": [
+		"sjoerd.stoffels@kramp.com"
+	],
+	"kramp-developers@kramphub.com": [
+		"kramp-frontend@kramphub.com",
+		"rene.william@kramp.com",
+		"samuel.ferrero@kramp.com"
+	],
+	"kramp-frontend@kramphub.com": [
+		"bart.huijgen@kramp.com",
+		"bart.postma@kramp.com",
+		"carlos.eduardo@kramp.com",
+		"jeroenberndsen@kramphub.com",
+		"jonathan.voor.de.poorte@kramp.com",
+		"martijn.velders@kramp.com",
+		"mateo.guzman@kramp.com",
+		"maurits.de.ridder@kramp.com",
+		"rachel.heimbach@kramp.com",
+		"samuel.ferrero@kramp.com",
+		"vadim.kalitsev@kramp.com",
+		"vladyslav.lazebnyi@kramp.com"
+	],
+	"kramp-integration@kramphub.com": [
+		"radek@kramphub.com",
+		"themba.shezi@kramp.com"
+	],
+	"kramp-landingzone-viewers@kramphub.com": [
+		"erik.bach-andersen@kramp.com",
+		"ewoud.van.dijk@kramp.com",
+		"peter.hendriks@kramp.com",
+		"rene.william@kramp.com"
+	],
+	"kramp-m2m@kramphub.com": [
+		"ashley.van.dee@kramp.com",
+		"Jan.Roelof.Meeuwes@kramp.com",
+		"marcel.van.den.berg@kramp.com",
+		"richard.van.den.toorn@kramp.com",
+		"sankara.ganapathy@kramp.com",
+		"thimo.dusseldorp@kramp.com"
+	],
+	"kramp-retail@kramphub.com": [
+		"jakub.molka@kramp.com",
+		"jaroslaw.stamblewski@kramp.com",
+		"Mariusz.Baranowski@kramp.com",
+		"mariusz.urbanowski@kramp.com",
+		"pawel.kowtun@kramp.com",
+		"piotr.haik@kramp.com",
+		"piotr.jedrzejczak@kramp.com"
+	],
+	"kramp-sre@kramphub.com": [
+		"nivard.postma@kramp.com",
+		"vadim.kalitsev@kramp.com"
+	],
+	"kramp-users@kramphub.com": [
+		"alexander.boer@kramp.com",
+		"bob.veurman@kramp.com",
+		"george.koprinkov@kramp.com",
+		"martijn.schlief@kramp.com",
+		"rene.william@kramp.com",
+		"ron.huiskamp@kramp.com",
+		"ron@kramphub.com",
+		"vadim.kalitsev@kramp.com"
+	],
+	"kramphub@kramphub.com": [
+		"alexander@kramphub.com",
+		"annelie@kramphub.com",
+		"artur@kramphub.com",
+		"arvind@kramphub.com",
+		"bas.benning@kramphub.com",
+		"derk@kramphub.com",
+		"edward@kramphub.com",
+		"egbert@kramphub.com",
+		"eric@kramphub.com",
+		"ernest@kramphub.com",
+		"inez@kramphub.com",
+		"jazzy@kramphub.com",
+		"jelle@kramphub.com",
+		"jelmer@kramphub.com",
+		"joeri@kramphub.com",
+		"joey@kramphub.com",
+		"joyce@kramphub.com",
+		"koray@kramphub.com",
+		"lars@kramphub.com",
+		"marius@kramphub.com",
+		"masha@kramphub.com",
+		"michiel@kramphub.com",
+		"miguel@kramphub.com",
+		"naveen@kramphub.com",
+		"nima@kramphub.com",
+		"radek@kramphub.com",
+		"rameez@kramphub.com",
+		"ramesh@kramphub.com",
+		"ricardo@kramphub.com",
+		"robert@kramphub.com",
+		"serdar@kramphub.com",
+		"tom@kramphub.com"
+	],
+	"landingzone_readers@kramphub.com": [
+		"andre.mateman@kramp.com",
+		"candice.johnson@kramp.com",
+		"erik.bach-andersen@kramp.com",
+		"hananja.monster@kramp.com",
+		"maarten.hoksbergen@kramp.com",
+		"peter.hendriks@kramp.com",
+		"rene.williams@kramp.com"
+	],
+	"mspos@kramphub.com": [
+		"oksana.kovaliova@mspos.net"
+	],
+	"non-developers@kramphub.com": [
+		"edward@kramphub.com",
+		"eric@kramphub.com"
+	],
+	"operations@kramphub.com": [
+		"edward@kramphub.com",
+		"radek@kramphub.com"
+	],
+	"organisation-administrators@kramphub.com": [
+		"alexander@kramphub.com",
+		"ernest@kramphub.com",
+		"inez@kramphub.com"
+	],
+	"partners@maykers.com": [
+		"paul.wissing@maykers.com",
+		"remko.strengholt@maykers.com"
+	],
+	"platformf@kramphub.com": [
+		"ahron@kramphub.com",
+		"alba@kramphub.com",
+		"alexander@kramphub.com",
+		"annelie@kramphub.com",
+		"arjen@kramphub.com",
+		"arthur.noort@kramphub.com",
+		"arthur@kramphub.com",
+		"daphne@kramphub.com",
+		"derick@kramphub.com",
+		"ersie@kramphub.com",
+		"francine@kramphub.com",
+		"gabriela@kramphub.com",
+		"guilherme@kramphub.com",
+		"inez@kramphub.com",
+		"inge@kramphub.com",
+		"janwillem@kramphub.com",
+		"jazzy@kramphub.com",
+		"jeroen@kramphub.com",
+		"jerome.hermans@kramp.com",
+		"joelle@kramphub.com",
+		"johan@kramphub.com",
+		"joyce@kramphub.com",
+		"kevin@kramphub.com",
+		"line.thomsen@maykers.com",
+		"maarten@kramphub.com",
+		"mariajoao@kramphub.com",
+		"mark@kramphub.com",
+		"masha@kramphub.com",
+		"mirte@kramphub.com",
+		"olivier@kramphub.com",
+		"outsystems@kramphub.com",
+		"paul@kramphub.com",
+		"pia@kramphub.com",
+		"remko@kramphub.com",
+		"rick@kramphub.com",
+		"roelof@kramphub.com",
+		"rozemarijn@kramphub.com",
+		"sander@kramphub.com",
+		"sjoerd@kramphub.com",
+		"stefan@kramphub.com",
+		"stephan@kramphub.com",
+		"timon@kramphub.com",
+		"wessel@kramphub.com"
+	],
+	"recruitment-applicants@kramphub.com": [
+		"ciancioclaudio1988@gmail.com",
+		"masha@kramphub.com",
+		"tyagi85prashant@gmail.com"
+	],
+	"recruitment-managers@kramphub.com": [
+		"arvind@kramphub.com",
+		"ernest@kramphub.com",
+		"joey@kramphub.com",
+		"masha@kramphub.com",
+		"radek@kramphub.com"
+	],
+	"security-officers@kramphub.com": [
+		"bjarne@kramphub.com",
+		"vadim@kramphub.com"
+	],
+	"sherlock-external@kramphub.com": [
+		"alexander.boer@kramp.com",
+		"annelie@kramphub.com"
+	],
+	"support@kramphub.com": [
+		"arvind@kramphub.com",
+		"edward@kramphub.com",
+		"ernest@kramphub.com",
+		"nima@kramphub.com",
+		"radek@kramphub.com",
+		"tom@kramphub.com"
+	],
+	"system-outsystems-tst@maykers.com": [
+		"ahron@kramphub.com",
+		"arjen@maykers.com",
+		"arthur@kramphub.com",
+		"francine@kramphub.com",
+		"guilherme@kramphub.com",
+		"inge@kramphub.com",
+		"janwillem@kramphub.com",
+		"jeroen@kramphub.com",
+		"johan@kramphub.com",
+		"maarten@kramphub.com",
+		"mariajoao@kramphub.com",
+		"mark@kramphub.com",
+		"olivier@kramphub.com",
+		"pia@kramphub.com",
+		"rick@kramphub.com",
+		"sander@kramphub.com",
+		"sjoerd@kramphub.com",
+		"stefan@kramphub.com",
+		"timon@kramphub.com"
+	],
+	"system-outsystems@maykers.com": [
+		"ahron@kramphub.com",
+		"arjen@maykers.com",
+		"arthur@kramphub.com",
+		"guilherme@kramphub.com",
+		"janwillem@kramphub.com",
+		"jeroen@kramphub.com",
+		"johan@kramphub.com",
+		"maarten@kramphub.com",
+		"mariajoao@kramphub.com",
+		"mark@kramphub.com",
+		"olivier@kramphub.com",
+		"pia@kramphub.com",
+		"rick@kramphub.com",
+		"sander@kramphub.com",
+		"sjoerd@kramphub.com",
+		"stefan@kramphub.com",
+		"timon@kramphub.com"
+	],
+	"system-segment@maykers.com": [
+		"arjen@maykers.com"
+	],
+	"system-sendgrid@maykers.com": [
+		"arjen@kramphub.com",
+		"arjen@maykers.com"
+	],
+	"system-smiirl@maykers.com": [
+		"arjen@kramphub.com",
+		"johan@kramphub.com",
+		"sander@kramphub.com"
+	],
+	"team-asterix@kramphub.com": [
+		"arvind@kramphub.com",
+		"bart.postma@kramp.com",
+		"casper@kramphub.com",
+		"edward@kramphub.com",
+		"gerben@kramphub.com",
+		"joey@kramphub.com",
+		"kevinberendsen@kramphub.com",
+		"paco@kramphub.com",
+		"robert@kramphub.com"
+	],
+	"team-delorean@kramphub.com": [
+		"egbert@kramphub.com",
+		"eric@kramphub.com",
+		"jelmer@kramphub.com",
+		"marius@kramphub.com",
+		"pedro@kramphub.com"
+	],
+	"team-myaccount@kramphub.com": [
+		"egbert@kramphub.com",
+		"jelmer@kramphub.com",
+		"saman@kramphub.com"
+	],
+	"team-rebooted@kramphub.com": [
+		"edward@kramphub.com",
+		"elshad@kramphub.com",
+		"koray@kramphub.com",
+		"mahmut@kramphub.com",
+		"michiel@kramphub.com",
+		"naveen@kramphub.com",
+		"nima@kramphub.com",
+		"ricardo@kramphub.com"
+	],
+	"team-sakal@kramphub.com": [
+		"edward@kramphub.com",
+		"marius@kramphub.com",
+		"miguel@kramphub.com",
+		"rameez@kramphub.com",
+		"serdar@kramphub.com"
+	],
+	"team-sharp@kramphub.com": [
+		"edward@kramphub.com",
+		"joeri@kramphub.com",
+		"lars@kramphub.com"
+	],
+	"team-sherlock@kramphub.com": [
+		"artur@kramphub.com",
+		"bas.benning@kramphub.com",
+		"bas@kramphub.com",
+		"derk@kramphub.com",
+		"egbert@kramphub.com",
+		"eric@kramphub.com",
+		"jelmer@kramphub.com",
+		"marius@kramphub.com",
+		"ramesh@kramphub.com",
+		"ramon@kramphub.com",
+		"tom@kramphub.com"
+	],
+	"team-sre@kramphub.com": [
+		"arvind@kramphub.com",
+		"edward@kramphub.com",
+		"ernest@kramphub.com",
+		"radek@kramphub.com",
+		"ricardo@kramphub.com",
+		"tom@kramphub.com"
+	],
+	"team-wizards@kramphub.com": [
+		"johan@kramphub.com",
+		"sander@kramphub.com",
+		"sjoerd@kramphub.com"
+	],
+	"team-wizards@maykers.com": [
+		"johan.denouden@maykers.com",
+		"sander.katier@maykers.com",
+		"sjoerd.wapperom@maykers.com"
+	]
+}
