@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"os"
+	"sync"
+	"time"
 
 	"github.com/urfave/cli"
 	admin "google.golang.org/api/admin/directory/v1"
@@ -13,7 +14,7 @@ import (
 func cmdExportGroupMemberships(c *cli.Context) error {
 	output := c.Args().Get(0)
 	if len(output) == 0 {
-		return errors.New("missing output file name, such as group-export-all.json")
+		output = fmt.Sprintf("gsuite-group-export-%s.json", time.Now().Format("2006-01-02"))
 	}
 
 	client := sharedAuthClient()
@@ -34,22 +35,60 @@ func cmdExportGroupMemberships(c *cli.Context) error {
 	if err != nil {
 		return fmt.Errorf("unable to retrieve groups in domain: %v", err)
 	}
-	groupToMembersMap := map[string][]string{}
-	for _, g := range r.Groups {
-		usersList := []string{}
-		// email is default
-		r, err := srv.Members.List(g.Email).Do()
-		if err != nil {
-			fmt.Printf("unable to retrieve members of group [%s] : %v\n", g.Email, err)
-		}
-		for _, u := range r.Members {
-			if len(u.Email) > 0 {
-				usersList = append(usersList, u.Email)
-			}
-		}
-		groupToMembersMap[g.Email] = usersList
+
+	type entry struct {
+		groupKey string
+		members  []*admin.Member
 	}
-	done() // end spinner
+	entries := make(chan entry)
+	wg := new(sync.WaitGroup)
+	for _, g := range r.Groups {
+		wg.Add(1)
+		// concurrently fetch members of a group
+		go func(groupKey string) {
+			if c.GlobalBool("v") {
+				fmt.Println("fetching members of", groupKey, "...")
+			}
+			usersList := []*admin.Member{}
+			// email is default
+			r, err := srv.Members.List(groupKey).Do()
+			if err != nil {
+				fmt.Printf("unable to retrieve members of group [%s] : %v\n", groupKey, err)
+			}
+			for _, u := range r.Members {
+				if len(u.Email) > 0 {
+					// hide internals
+					u.Etag = ""
+					u.Id = ""
+					u.Kind = ""
+					u.Role = ""
+					u.Type = ""
+					usersList = append(usersList, u)
+				}
+			}
+			entries <- entry{groupKey: groupKey, members: usersList}
+			wg.Done()
+		}(g.Email)
+	}
+	groupToMembersMap := map[string][]*admin.Member{}
+	// collect results
+	go func() {
+		for each := range entries {
+			if c.GlobalBool("v") {
+				fmt.Println("... collect members of", each.groupKey)
+			}
+			groupToMembersMap[each.groupKey] = each.members
+		}
+	}()
+
+	// wait for all group queries
+	wg.Wait()
+
+	// no more results
+	close(entries)
+
+	// end spinner
+	done()
 
 	f, err := os.Create(output)
 	if err != nil {
