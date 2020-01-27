@@ -180,7 +180,10 @@ func newApp() *cli.App {
 					Action: func(c *cli.Context) error {
 						return cmdExportGroupMemberships(c)
 					},
-					Flags:     []cli.Flag{format},
+					Flags: []cli.Flag{cli.BoolFlag{
+						Name:  "csv, CSV",
+						Usage: "-csv or -CSV",
+					}, format},
 					ArgsUsage: `group export`,
 				},
 			},
