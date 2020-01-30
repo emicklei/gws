@@ -35,8 +35,8 @@ Any command can produce JSON format using `-json` at the end of the command.
     gsuite group delete my-old@company.com
     gsuite group add my-group this-person,other-person@company.com
     gsuite group remove my-group this-person
-    gsuite group export -json > all.json
-    gsuite group export -csv > all.csv
+    gsuite group export -json > all.json    
+    gsuite --domain company.com group export -csv > company-only.csv
 
     gsuite role list
     gsuite role assignments _USER_MANAGEMENT_ADMIN_ROLE

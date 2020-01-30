@@ -4,7 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
-	"sort"
+	"strings"
 	"sync"
 
 	"github.com/urfave/cli"
@@ -102,33 +102,14 @@ func cmdExportGroupMemberships(c *cli.Context) error {
 	return nil
 }
 
+// rows with  {group.email},{role.name},{member.email}
 func writeGroupToMembersCSV(groupToMembersMap map[string][]*admin.Member) {
-	sheet := NewTable()
-	groups := []string{}
-	for group := range groupToMembersMap {
-		groups = append(groups, group)
-	}
-	sort.Strings(groups)
-	for c, each := range groups {
-		sheet.Set(0, c+1, each) // 0,0 is empty
-	}
-	nextRow := 1
-	for group, members := range groupToMembersMap {
-		column := sheet.FindColumn(0, group)
-		for _, member := range members {
-			row := sheet.FindRow(0, member.Email)
-			if row == -1 {
-				row = nextRow
-				sheet.Set(row, 0, member.Email)
-				nextRow++
-			}
-			sheet.Set(row, column, member.Role)
-		}
-	}
 	w := csv.NewWriter(os.Stdout)
-	for r := 0; r < sheet.Rows(); r++ {
-		record := sheet.Row(r)
-		w.Write(record)
+	w.Write([]string{"group", "role", "member"}) // header
+	for group, members := range groupToMembersMap {
+		for _, member := range members {
+			w.Write([]string{group, strings.ToLower(member.Role), member.Email})
+		}
 	}
 	w.Flush()
 }
