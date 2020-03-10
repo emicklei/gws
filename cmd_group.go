@@ -11,7 +11,7 @@ import (
 
 func cmdGroupList(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -40,7 +40,7 @@ func cmdGroupList(c *cli.Context) error {
 }
 
 func cmdGroupMembers(c *cli.Context) error {
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -52,7 +52,7 @@ func cmdGroupMembers(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -75,7 +75,7 @@ func cmdGroupMembers(c *cli.Context) error {
 
 func cmdGroupInfo(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -87,7 +87,7 @@ func cmdGroupInfo(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -106,7 +106,7 @@ func cmdGroupInfo(c *cli.Context) error {
 }
 
 func cmdGroupDelete(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient())
+	srv, err := admin.New(sharedAuthClient(c))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -116,7 +116,7 @@ func cmdGroupDelete(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -137,7 +137,7 @@ func cmdGroupDelete(c *cli.Context) error {
 
 // deprecated
 func cmdGroupAddMember(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient())
+	srv, err := admin.New(sharedAuthClient(c))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -147,7 +147,7 @@ func cmdGroupAddMember(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -159,7 +159,7 @@ func cmdGroupAddMember(c *cli.Context) error {
 		return fmt.Errorf("missing user email in command")
 	}
 	if strings.Index(userKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -182,7 +182,7 @@ func cmdGroupAddMember(c *cli.Context) error {
 }
 
 func cmdGroupAddMembers(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient())
+	srv, err := admin.New(sharedAuthClient(c))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -192,7 +192,7 @@ func cmdGroupAddMembers(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -201,13 +201,13 @@ func cmdGroupAddMembers(c *cli.Context) error {
 	// users argument
 	userArgument := c.Args().Get(1)
 	if len(userArgument) == 0 {
-		return fmt.Errorf("missing user(s) email in command")
+		return fmt.Errorf("missing (command separated) user(s) email in command")
 	}
 	userKeys := []string{}
 	for _, each := range strings.Split(userArgument, ",") {
 		userKey := each
 		if strings.Index(each, "@") == -1 {
-			domain, err := primaryDomain()
+			domain, err := primaryDomain(c)
 			if err != nil {
 				return err
 			}
@@ -236,7 +236,7 @@ func cmdGroupAddMembers(c *cli.Context) error {
 }
 
 func cmdGroupRemoveMember(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient())
+	srv, err := admin.New(sharedAuthClient(c))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -246,7 +246,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -258,7 +258,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 		return fmt.Errorf("missing user email in command")
 	}
 	if strings.Index(userKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -278,7 +278,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 }
 
 func cmdGroupCreate(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient())
+	srv, err := admin.New(sharedAuthClient(c))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -288,7 +288,7 @@ func cmdGroupCreate(c *cli.Context) error {
 		return fmt.Errorf("missing group email in command")
 	}
 	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}

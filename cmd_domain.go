@@ -10,7 +10,7 @@ import (
 
 func cmdDomainList(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -30,8 +30,8 @@ func cmdDomainList(c *cli.Context) error {
 	return nil
 }
 
-func primaryDomain() (string, error) {
-	client := sharedAuthClient()
+func primaryDomain(c *cli.Context) (string, error) {
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {

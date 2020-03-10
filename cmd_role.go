@@ -9,7 +9,7 @@ import (
 )
 
 func cmdRoleList(c *cli.Context) error {
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -32,7 +32,7 @@ func cmdRoleList(c *cli.Context) error {
 }
 
 func cmdRoleAssignment(c *cli.Context) error {
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {

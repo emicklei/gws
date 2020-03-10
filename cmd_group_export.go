@@ -12,7 +12,7 @@ import (
 )
 
 func cmdExportGroupMemberships(c *cli.Context) error {
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {

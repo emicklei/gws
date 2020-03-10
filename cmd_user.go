@@ -13,7 +13,7 @@ import (
 
 func cmdUserList(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -44,7 +44,7 @@ func cmdUserList(c *cli.Context) error {
 
 func cmdUserMembershipList(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -57,7 +57,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 		return fmt.Errorf("missing user email in command")
 	}
 	if strings.Index(memberKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -142,7 +142,7 @@ type memberCheck struct {
 
 func cmdUserInfo(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -154,7 +154,7 @@ func cmdUserInfo(c *cli.Context) error {
 		return fmt.Errorf("missing user email in command")
 	}
 	if strings.Index(userKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -174,7 +174,7 @@ func cmdUserInfo(c *cli.Context) error {
 
 func cmdUserAlias(c *cli.Context) error {
 
-	client := sharedAuthClient()
+	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
 	if err != nil {
@@ -186,7 +186,7 @@ func cmdUserAlias(c *cli.Context) error {
 		return fmt.Errorf("missing user email in command")
 	}
 	if strings.Index(userKey, "@") == -1 {
-		domain, err := primaryDomain()
+		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
 		}
@@ -205,7 +205,7 @@ func cmdUserAlias(c *cli.Context) error {
 }
 
 func cmdUserSuspend(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient())
+	srv, err := admin.New(sharedAuthClient(c))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %v", err)
 	}

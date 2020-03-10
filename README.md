@@ -47,8 +47,8 @@ Any command can produce JSON format using `-json` at the end of the command.
 
 ## requirements
 
-- A G Suite domain with API access enabled
-- A Google account in that domain with administrator privileges
+- A Google Cloud Identity domain with API access enabled
+- A Google account in that domain with enough administrator privileges
 - A Google Cloud Platform project with Admin SDK enabled ( https://console.developers.google.com/apis/library/admin.googleapis.com?project=YOURPROJECT )
 
 
@@ -56,18 +56,18 @@ Any command can produce JSON format using `-json` at the end of the command.
 
 - Using the Google Cloud Platform console, create a new OAuth 2.0 client ID credential in the project for which you enabled the Admin SDK.
 - Download the JSON file from the list of Credentials (download button on the right).
-- Save the file to *gsuite-credentials.json* in your *home* directory.
+- Save the file to *gsuite-credentials.json* in your *home* directory or a *local* directory if you need access to more organisations. *guite* will look for this file in the current directoy first.
 
 ## user permissions
 
 *gsuite* requires the following authentication scopes to be consent per user.
 You will be asked to accept those on the first time you use *gsuite*.
+Note that accepting these scopes does not mean you as a user have access ; this is controlled in Cloud Identity (or GSuite) Admin Console.
 
-- https://www.googleapis.com/auth/admin.directory.group.member.readonly
-- https://www.googleapis.com/auth/admin.directory.user.readonly
+- https://www.googleapis.com/auth/admin.directory.user
+- https://www.googleapis.com/auth/admin.directory.group ( for group management )
 - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
 - https://www.googleapis.com/auth/admin.directory.domain.readonly
-- https://www.googleapis.com/auth/admin.directory.group ( for group management )
 
 See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
@@ -81,4 +81,4 @@ This installation requires the Go SDK (1.13+).
 
 Have problems using *gsuite* ? Read about [known errors](/errors.md)
 
-&copy; 2019, ernestmicklei.com. MIT License. Contributions welcome.
+&copy; 2019+, ernestmicklei.com. MIT License. Contributions welcome.

@@ -39,6 +39,11 @@ func newApp() *cli.App {
 			Name:  "domain",
 			Usage: "filter by domain",
 		},
+		cli.StringFlag{
+			Name:  "credentials",
+			Value: "gsuite-credentials.json",
+			Usage: "override the credentials file found in HOME",
+		},
 	}
 	format := cli.BoolFlag{
 		Name:  "json, JSON",

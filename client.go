@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"sync"
 
+	"github.com/urfave/cli"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -19,15 +20,24 @@ import (
 var once sync.Once
 var sharedClient *http.Client
 
-func sharedAuthClient() *http.Client {
+func sharedAuthClient(c *cli.Context) *http.Client {
 	once.Do(func() {
-		sharedClient = newAuthClient()
+		credfile := c.GlobalString("credentials")
+		if len(credfile) == 0 {
+			if info, err := os.Stat("gsuite-credentials.json"); err == nil && !info.IsDir() {
+				credfile = "gsuite-credentials.json"
+			}
+		}
+		if len(credfile) == 0 {
+			credfile = filepath.Join(os.Getenv("HOME"), "gsuite-credentials.json")
+		}
+		sharedClient = newAuthClient(credfile)
 	})
 	return sharedClient
 }
 
-func newAuthClient() *http.Client {
-	b, err := ioutil.ReadFile(filepath.Join(os.Getenv("HOME"), "gsuite-credentials.json"))
+func newAuthClient(credentialsFilename string) *http.Client {
+	b, err := ioutil.ReadFile(credentialsFilename)
 	if err != nil {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
