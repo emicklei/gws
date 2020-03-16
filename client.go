@@ -39,7 +39,8 @@ func sharedAuthClient(c *cli.Context) *http.Client {
 func newAuthClient(credentialsFilename string) *http.Client {
 	b, err := ioutil.ReadFile(credentialsFilename)
 	if err != nil {
-		log.Fatalf("Unable to read client secret file: %v", err)
+		abs, _ := filepath.Abs(credentialsFilename)
+		log.Fatalf("Unable to read client secret file [%s]: %v", abs, err)
 	}
 
 	// After modifying these scopes, delete your previously saved token.json.
