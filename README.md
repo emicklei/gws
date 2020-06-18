@@ -56,7 +56,7 @@ Any command can produce JSON format using `-json` at the end of the command.
 
 - Using the Google Cloud Platform console, create a new OAuth 2.0 client ID credential in the project for which you enabled the Admin SDK.
 - Download the JSON file from the list of Credentials (download button on the right).
-- Save the file to *gsuite-credentials.json* in your *home* directory or a *local* directory if you need access to more organisations. *guite* will look for this file in the current directoy first.
+- Save the file to *gsuite-credentials.json* in your *home* directory or a *local* directory if you need access to more organisations. *gsuite* will look for this file in the current directoy first.
 
 ## user permissions
 
@@ -79,6 +79,6 @@ This installation requires the Go SDK (1.13+).
 
 ## help
 
-Have problems using *gsuite* ? Read about [known errors](/errors.md)
+Having problems using *gsuite* ? Read about [known errors](/errors.md)
 
 &copy; 2019+, ernestmicklei.com. MIT License. Contributions welcome.
