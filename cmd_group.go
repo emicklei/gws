@@ -216,7 +216,7 @@ func cmdGroupAddMembers(c *cli.Context) error {
 		userKeys = append(userKeys, userKey)
 	}
 	// prompt
-	if !promptForYes(c, fmt.Sprintf("Are you sure to add member(s) [%s] to group [%s] (y/N)? ", userArgument, groupKey)) {
+	if !promptForYes(c, fmt.Sprintf("Are you sure to add member(s) %v to group [%s] (y/N)? ", userKeys, groupKey)) {
 		return errors.New("group add aborted")
 	}
 	for _, each := range userKeys {
