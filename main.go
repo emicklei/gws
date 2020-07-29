@@ -162,12 +162,12 @@ func newApp() *cli.App {
 				},
 				{
 					Name:  "add",
-					Usage: "Add a member to a group",
+					Usage: "Add a member(s) to a group. Use spaces to separate members",
 					Action: func(c *cli.Context) error {
 						return cmdGroupAddMembers(c)
 					},
 					Flags:     []cli.Flag{format},
-					ArgsUsage: `group add my-group new-person`,
+					ArgsUsage: `group add my-group new-person other-person`,
 				},
 				{
 					Name:  "remove",

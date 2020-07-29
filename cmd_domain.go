@@ -30,7 +30,12 @@ func cmdDomainList(c *cli.Context) error {
 	return nil
 }
 
+var cachedPrimaryDomain string
+
 func primaryDomain(c *cli.Context) (string, error) {
+	if len(cachedPrimaryDomain) > 0 {
+		return cachedPrimaryDomain, nil
+	}
 	client := sharedAuthClient(c)
 
 	srv, err := admin.New(client)
@@ -45,6 +50,7 @@ func primaryDomain(c *cli.Context) (string, error) {
 
 	for _, each := range r.Domains {
 		if each.IsPrimary {
+			cachedPrimaryDomain = each.DomainName
 			return each.DomainName, nil
 		}
 	}

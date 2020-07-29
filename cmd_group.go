@@ -201,10 +201,10 @@ func cmdGroupAddMembers(c *cli.Context) error {
 	// users argument
 	userArgument := c.Args().Get(1)
 	if len(userArgument) == 0 {
-		return fmt.Errorf("missing (command separated) user(s) email in command")
+		return fmt.Errorf("missing (space separated) user(s) email in command")
 	}
 	userKeys := []string{}
-	for _, each := range strings.Split(userArgument, ",") {
+	for _, each := range c.Args()[1:] {
 		userKey := each
 		if strings.Index(each, "@") == -1 {
 			domain, err := primaryDomain(c)
