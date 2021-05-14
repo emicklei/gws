@@ -51,6 +51,11 @@ Any command can produce JSON format using `-json` at the end of the command.
 - A Google account in that domain with enough administrator privileges
 - A Google Cloud Platform project with Admin SDK enabled ( https://console.developers.google.com/apis/library/admin.googleapis.com?project=YOURPROJECT )
 
+## install
+
+Installation requires the Go SDK.
+
+    go install github.com/emicklei/gsuite@latest 
 
 ## tool authentication
 
