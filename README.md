@@ -76,12 +76,6 @@ Note that accepting these scopes does not mean you as a user have access ; this 
 
 See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
-## install from source
-
-This installation requires the Go SDK (1.13+).
-
-    go install github.com/emicklei/gsuite
-
 ## help
 
 Having problems using *gsuite* ? Read about [known errors](/errors.md)
