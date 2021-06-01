@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/urfave/cli"
 	admin "google.golang.org/api/admin/directory/v1"
@@ -30,11 +31,16 @@ func cmdDomainList(c *cli.Context) error {
 	return nil
 }
 
+const primaryDomainEnvironmentKey = "GSUITE_PRIMARY_DOMAIN"
+
 var cachedPrimaryDomain string
 
 func primaryDomain(c *cli.Context) (string, error) {
 	if len(cachedPrimaryDomain) > 0 {
 		return cachedPrimaryDomain, nil
+	}
+	if p := os.Getenv(primaryDomainEnvironmentKey); len(p) > 0 {
+		return p, nil
 	}
 	client := sharedAuthClient(c)
 

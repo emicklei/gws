@@ -51,6 +51,12 @@ Any command can produce JSON format using `-json` at the end of the command.
 - A Google account in that domain with enough administrator privileges
 - A Google Cloud Platform project with Admin SDK enabled ( https://console.developers.google.com/apis/library/admin.googleapis.com?project=YOURPROJECT )
 
+### primary domain access
+
+If your Google GSuite account only has "Group Editor" role then you cannot use the short syntax for accounts that require the lookup of the primary domain. You can workaround this missing permission by setting an enviroment variable such as:
+
+    export GSUITE_PRIMARY_DOMAIN=yourhost.com
+
 ## install
 
 Installation requires the Go SDK.
