@@ -20,10 +20,10 @@ func newApp() *cli.App {
 	app := cli.NewApp()
 	app.Version = version
 	app.EnableBashCompletion = true
-	app.Name = "gsuite"
+	app.Name = "gws"
 	app.Usage = `Google G Suite command line tool
 
-	see https://github.com/emicklei/gsuite for documentation.
+	see https://github.com/emicklei/gws for documentation.
 `
 	// override -v
 	cli.VersionFlag = cli.BoolFlag{
@@ -224,7 +224,7 @@ func newApp() *cli.App {
 		},
 		{
 			Name:  "examples",
-			Usage: "Show examples of how to use gsuite.",
+			Usage: "Show examples of how to use gws.",
 			Action: func(c *cli.Context) error {
 				return cmdShowExamples(c)
 			},

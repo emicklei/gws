@@ -68,7 +68,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 
 	// get all groups
 	if c.GlobalBool("v") {
-		log.Println("[gsuite] fetching all groups")
+		log.Println("[gws] fetching all groups")
 	}
 	r, err := srv.Groups.List().
 		Customer(myAccoutsCustomerID).
@@ -83,7 +83,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 
 	for _, g := range r.Groups {
 		if c.GlobalBool("v") {
-			log.Printf("[gsuite] is %s member of group %s ?\n", memberKey, g.Email)
+			log.Printf("[gws] is %s member of group %s ?\n", memberKey, g.Email)
 		}
 		wg.Add(1)
 		go func(check memberCheck) {

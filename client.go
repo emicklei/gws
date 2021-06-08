@@ -24,12 +24,12 @@ func sharedAuthClient(c *cli.Context) *http.Client {
 	once.Do(func() {
 		credfile := c.GlobalString("credentials")
 		if len(credfile) == 0 {
-			if info, err := os.Stat("gsuite-credentials.json"); err == nil && !info.IsDir() {
-				credfile = "gsuite-credentials.json"
+			if info, err := os.Stat("gws-credentials.json"); err == nil && !info.IsDir() {
+				credfile = "gws-credentials.json"
 			}
 		}
 		if len(credfile) == 0 {
-			credfile = filepath.Join(os.Getenv("HOME"), "gsuite-credentials.json")
+			credfile = filepath.Join(os.Getenv("HOME"), "gws-credentials.json")
 		}
 		sharedClient = newAuthClient(credfile)
 	})
@@ -65,7 +65,7 @@ func getClient(config *oauth2.Config) *http.Client {
 	// The file token.json stores the user's access and refresh tokens, and is
 	// created automatically when the authorization flow completes for the first
 	// time.
-	tokFile := filepath.Join(os.Getenv("HOME"), "gsuite-token.json")
+	tokFile := filepath.Join(os.Getenv("HOME"), "gws-token.json")
 	tok, err := tokenFromFile(tokFile)
 	if err != nil {
 		tok = getTokenFromWeb(config)

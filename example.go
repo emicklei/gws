@@ -11,56 +11,56 @@ func cmdShowExamples(c *cli.Context) error {
 - - - - - - - - - - - - - - - - - - - - 
 List the email addresses of all users.
 	
-	gsuite user list
+	gws user list
 
 List the groups of which the user is a member.
 
-	gsuite user membership john.doe
-	gsuite user membership john.doe@company.com
+	gws user membership john.doe
+	gws user membership john.doe@company.com
 
 Show details of a user.
 
-	gsuite user info john.doe
-	gsuite user info john.doe@company.com
+	gws user info john.doe
+	gws user info john.doe@company.com
 
 Manage users
 
-	gsuite user suspend martin "left the company"
+	gws user suspend martin "left the company"
 
 List the email address of all groups
 
-	gsuite group list
+	gws group list
 
 List the members of a group
 
-	gsuite group members all
-	gsuite group members all@company.com
+	gws group members all
+	gws group members all@company.com
 
 Show details of a group.
 
-	gsuite group info all
-	gsuite group info all@company.com
+	gws group info all
+	gws group info all@company.com
 
 Managing groups
 
-	gsuite group create brand-new-group
-	gsuite group delete my-old-group
-	gsuite group add my-group john.doe
-	gsuite group remove my-group john.doe
+	gws group create brand-new-group
+	gws group delete my-old-group
+	gws group add my-group john.doe
+	gws group remove my-group john.doe
 
 List the available roles to manage.
 
-	gsuite role list
+	gws role list
 
 List the users who have the administration role
 
-	gsuite role assignments _USER_MANAGEMENT_ADMIN_ROLE
+	gws role assignments _USER_MANAGEMENT_ADMIN_ROLE
 
 List the (internet) domains that are managed
 
-	gsuite domain list
+	gws domain list
 
-See full documentation on https://github.com/emicklei/gsuite
+See full documentation on https://github.com/emicklei/gws
 - - - - - - - - - - - - - - - - - - - -
 `
 	fmt.Println(examples)

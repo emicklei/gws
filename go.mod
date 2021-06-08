@@ -1,4 +1,4 @@
-module github.com/emicklei/gsuite
+module github.com/emicklei/gws
 
 go 1.12
 

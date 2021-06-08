@@ -31,7 +31,7 @@ func cmdDomainList(c *cli.Context) error {
 	return nil
 }
 
-const primaryDomainEnvironmentKey = "GSUITE_PRIMARY_DOMAIN"
+const primaryDomainEnvironmentKey = "GWS_PRIMARY_DOMAIN"
 
 var cachedPrimaryDomain string
 

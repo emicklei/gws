@@ -71,8 +71,8 @@ Installation requires the Go SDK.
 
 ## user permissions
 
-*gsuite* requires the following authentication scopes to be consent per user.
-You will be asked to accept those on the first time you use *gsuite*.
+*gws* requires the following authentication scopes to be consent per user.
+You will be asked to accept those on the first time you use *gws*.
 Note that accepting these scopes does not mean you as a user have access ; this is controlled in Cloud Identity (or Google Workspace/GSuite) Admin Console.
 
 - https://www.googleapis.com/auth/admin.directory.user
