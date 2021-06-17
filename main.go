@@ -21,7 +21,7 @@ func newApp() *cli.App {
 	app.Version = version
 	app.EnableBashCompletion = true
 	app.Name = "gws"
-	app.Usage = `Google G Suite command line tool
+	app.Usage = `Google Workspace command line tool
 
 	see https://github.com/emicklei/gws for documentation.
 `

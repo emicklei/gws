@@ -8,13 +8,15 @@ import (
 	"sync"
 
 	"github.com/urfave/cli"
+	"golang.org/x/net/context"
 	admin "google.golang.org/api/admin/directory/v1"
+	"google.golang.org/api/option"
 )
 
 func cmdExportGroupMemberships(c *cli.Context) error {
 	client := sharedAuthClient(c)
 
-	srv, err := admin.New(client)
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory Client %v", err)
 	}

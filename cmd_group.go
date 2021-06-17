@@ -6,14 +6,16 @@ import (
 	"strings"
 
 	"github.com/urfave/cli"
+	"golang.org/x/net/context"
 	admin "google.golang.org/api/admin/directory/v1"
+	"google.golang.org/api/option"
 )
 
 func cmdGroupList(c *cli.Context) error {
 
 	client := sharedAuthClient(c)
 
-	srv, err := admin.New(client)
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
@@ -42,7 +44,7 @@ func cmdGroupList(c *cli.Context) error {
 func cmdGroupMembers(c *cli.Context) error {
 	client := sharedAuthClient(c)
 
-	srv, err := admin.New(client)
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
@@ -77,7 +79,7 @@ func cmdGroupInfo(c *cli.Context) error {
 
 	client := sharedAuthClient(c)
 
-	srv, err := admin.New(client)
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w", err)
 	}
@@ -106,7 +108,7 @@ func cmdGroupInfo(c *cli.Context) error {
 }
 
 func cmdGroupDelete(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient(c))
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(sharedAuthClient(c)))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -135,54 +137,8 @@ func cmdGroupDelete(c *cli.Context) error {
 	return nil
 }
 
-// deprecated
-func cmdGroupAddMember(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient(c))
-	if err != nil {
-		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
-	}
-	// group argument
-	groupKey := c.Args().Get(0)
-	if len(groupKey) == 0 {
-		return fmt.Errorf("missing group email in command")
-	}
-	if strings.Index(groupKey, "@") == -1 {
-		domain, err := primaryDomain(c)
-		if err != nil {
-			return err
-		}
-		groupKey = fmt.Sprintf("%s@%s", groupKey, domain)
-	}
-	// user argument
-	userKey := c.Args().Get(1)
-	if len(userKey) == 0 {
-		return fmt.Errorf("missing user email in command")
-	}
-	if strings.Index(userKey, "@") == -1 {
-		domain, err := primaryDomain(c)
-		if err != nil {
-			return err
-		}
-		userKey = fmt.Sprintf("%s@%s", userKey, domain)
-	}
-	// prompt
-	if !promptForYes(c, fmt.Sprintf("Are you sure to add member [%s] to group [%s] (y/N)? ", userKey, groupKey)) {
-		return errors.New("group add aborted")
-	}
-	// doit
-	member := &admin.Member{
-		Email: userKey,
-	}
-	_, err = srv.Members.Insert(groupKey, member).Do()
-	if err != nil {
-		return fmt.Errorf("unable to add member [%s] to group [%s] because: %w (%T)", userKey, groupKey, err, err)
-	}
-	fmt.Printf("added member [%s] to group [%s]\n", userKey, groupKey)
-	return nil
-}
-
 func cmdGroupAddMembers(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient(c))
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(sharedAuthClient(c)))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -236,7 +192,7 @@ func cmdGroupAddMembers(c *cli.Context) error {
 }
 
 func cmdGroupRemoveMember(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient(c))
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(sharedAuthClient(c)))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}
@@ -278,7 +234,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 }
 
 func cmdGroupCreate(c *cli.Context) error {
-	srv, err := admin.New(sharedAuthClient(c))
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(sharedAuthClient(c)))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory client %w (%T)", err, err)
 	}

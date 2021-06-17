@@ -1,19 +1,21 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
 
 	"github.com/urfave/cli"
 	admin "google.golang.org/api/admin/directory/v1"
+	"google.golang.org/api/option"
 )
 
 func cmdDomainList(c *cli.Context) error {
 
 	client := sharedAuthClient(c)
 
-	srv, err := admin.New(client)
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
 		return fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
@@ -44,7 +46,7 @@ func primaryDomain(c *cli.Context) (string, error) {
 	}
 	client := sharedAuthClient(c)
 
-	srv, err := admin.New(client)
+	srv, err := admin.NewService(context.Background(), option.WithHTTPClient(client))
 	if err != nil {
 		return "", fmt.Errorf("unable to retrieve directory Client %v", err)
 	}
