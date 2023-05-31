@@ -86,4 +86,4 @@ See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
 
 Having problems using *gws* ? Read about [known errors](/errors.md)
 
-&copy; 2019+, ernestmicklei.com. MIT License. Contributions welcome.
+&copy; 2023+, ernestmicklei.com. MIT License. Contributions welcome.
