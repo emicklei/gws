@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.0] - 2023-05-31
+
+- updated dependencies
+
 ## [v0.12.0] - 2021-06-15
 
 - renamed gsuite to gws
