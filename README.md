@@ -1,7 +1,5 @@
 # gws - command line tool to use the Google Workspace Admin SDK
 
-[![Build Status](https://travis-ci.org/emicklei/gws.png)](https://travis-ci.org/emicklei/gws)
-
 ## features
 
 - list of users
