@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -37,7 +36,7 @@ func sharedAuthClient(c *cli.Context) *http.Client {
 }
 
 func newAuthClient(credentialsFilename string) *http.Client {
-	b, err := ioutil.ReadFile(credentialsFilename)
+	b, err := os.ReadFile(credentialsFilename)
 	if err != nil {
 		abs, _ := filepath.Abs(credentialsFilename)
 		log.Fatalf("Unable to read client secret file [%s]: %v", abs, err)

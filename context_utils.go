@@ -12,7 +12,7 @@ func userKey(c *cli.Context) (string, error) {
 	if len(userKey) == 0 {
 		return "", fmt.Errorf("missing user email in command")
 	}
-	if strings.Index(userKey, "@") == -1 {
+	if !strings.Contains(userKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return "", err

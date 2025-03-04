@@ -58,7 +58,7 @@ func cmdUserMembershipList(c *cli.Context) error {
 	if len(memberKey) == 0 {
 		return fmt.Errorf("missing user email in command")
 	}
-	if strings.Index(memberKey, "@") == -1 {
+	if !strings.Contains(memberKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -155,7 +155,7 @@ func cmdUserInfo(c *cli.Context) error {
 	if len(userKey) == 0 {
 		return fmt.Errorf("missing user email in command")
 	}
-	if strings.Index(userKey, "@") == -1 {
+	if !strings.Contains(userKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -187,7 +187,7 @@ func cmdUserAlias(c *cli.Context) error {
 	if len(userKey) == 0 {
 		return fmt.Errorf("missing user email in command")
 	}
-	if strings.Index(userKey, "@") == -1 {
+	if !strings.Contains(userKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err

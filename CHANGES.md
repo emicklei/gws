@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.1.0] - 2025-03-04
+
+- updated dependencies
+
 ## [v1.0.0] - 2023-05-31
 
 - updated dependencies

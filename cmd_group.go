@@ -53,7 +53,7 @@ func cmdGroupMembers(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
-	if strings.Index(groupKey, "@") == -1 {
+	if !strings.Contains(groupKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -88,7 +88,7 @@ func cmdGroupInfo(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
-	if strings.Index(groupKey, "@") == -1 {
+	if !strings.Contains(groupKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -117,7 +117,7 @@ func cmdGroupDelete(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
-	if strings.Index(groupKey, "@") == -1 {
+	if !strings.Contains(groupKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -147,7 +147,7 @@ func cmdGroupAddMembers(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
-	if strings.Index(groupKey, "@") == -1 {
+	if !strings.Contains(groupKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -162,7 +162,7 @@ func cmdGroupAddMembers(c *cli.Context) error {
 	userKeys := []string{}
 	for _, each := range c.Args()[1:] {
 		userKey := each
-		if strings.Index(each, "@") == -1 {
+		if !strings.Contains(each, "@") {
 			domain, err := primaryDomain(c)
 			if err != nil {
 				return err
@@ -201,7 +201,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
-	if strings.Index(groupKey, "@") == -1 {
+	if !strings.Contains(groupKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -213,7 +213,7 @@ func cmdGroupRemoveMember(c *cli.Context) error {
 	if len(userKey) == 0 {
 		return fmt.Errorf("missing user email in command")
 	}
-	if strings.Index(userKey, "@") == -1 {
+	if !strings.Contains(userKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err
@@ -243,7 +243,7 @@ func cmdGroupCreate(c *cli.Context) error {
 	if len(groupKey) == 0 {
 		return fmt.Errorf("missing group email in command")
 	}
-	if strings.Index(groupKey, "@") == -1 {
+	if !strings.Contains(groupKey, "@") {
 		domain, err := primaryDomain(c)
 		if err != nil {
 			return err

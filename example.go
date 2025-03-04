@@ -6,7 +6,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-func cmdShowExamples(c *cli.Context) error {
+func cmdShowExamples(_ *cli.Context) error {
 	examples := `
 - - - - - - - - - - - - - - - - - - - - 
 List the email addresses of all users.
