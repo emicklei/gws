@@ -63,6 +63,13 @@ Installation requires the Go SDK.
 
 ## tool authentication
 
+There are two ways to authenticate yourself. One through is through the [installed apps](https://developers.google.com/identity/protocols/oauth2#installed) flow,
+the other is through the [service accounts](https://developers.google.com/identity/protocols/oauth2/service-account) flow. The first
+flow requires you to create a new OAuth 2.0 client ID credential in the project and store these and the user credentials files on your file system.
+The latter does not keep any credentials stored locally.
+
+## installed application authentication flow
+
 - Using the Google Cloud Platform console, create a new OAuth 2.0 client ID credential in the project for which you enabled the Admin SDK.
 - Download the JSON file from the list of Credentials (download button on the right).
 - Save the file to *gws-credentials.json* in your *home* directory or a *local* directory if you need access to more organisations. *gws* will look for this file in the current directoy first.
@@ -71,14 +78,41 @@ Installation requires the Go SDK.
 
 *gws* requires the following authentication scopes to be consent per user.
 You will be asked to accept those on the first time you use *gws*.
-Note that accepting these scopes does not mean you as a user have access ; this is controlled in Cloud Identity (or Google Workspace/GSuite) Admin Console.
+Note that accepting these scopes does not mean you as a user have access; this is controlled in Cloud Identity (or Google Workspace/GSuite) Admin Console.
 
 - https://www.googleapis.com/auth/admin.directory.user
-- https://www.googleapis.com/auth/admin.directory.group ( for group management )
+- https://www.googleapis.com/auth/admin.directory.group (for group management)
 - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly
 - https://www.googleapis.com/auth/admin.directory.domain.readonly
+- https://www.googleapis.com/auth/iam (for service account lookup)
 
 See also https://developers.google.com/admin-sdk/directory/v1/guides/authorizing
+
+
+## service account authentication flow
+
+- Create a service account in your Google Cloud project 
+  - grant the roles iam.serviceAccountTokenCreator and iam.serviceAccountUser to the service account itself
+  - grant the roles iam.serviceAccountTokenCreator and iam.serviceAccountUser to the users you want to use *gws* with
+- Grant the service account the role iam.serviceAccountViewer in your Google organization
+- Delegate domain-wide authority to the service account
+  - follow the instructions in the [documentation](https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority)
+  - using the following scopes for read-only access:
+    - https://www.googleapis.com/auth/admin.directory.domain.readonly
+    - https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly 
+    - https://www.googleapis.com/auth/admin.directory.group.readonly
+    - https://www.googleapis.com/auth/admin.directory.user.readonly
+    - https://www.googleapis.com/auth/iam
+
+  - or the following scopes for read-write access:
+      - https://www.googleapis.com/auth/admin.directory.domain.readonly
+      - https://www.googleapis.com/auth/admin.directory.rolemanagement
+      - https://www.googleapis.com/auth/admin.directory.group
+      - https://www.googleapis.com/auth/admin.directory.user
+      - https://www.googleapis.com/auth/iam
+  
+- set the environment variable GWS_SERVICE_ACCOUNT to the email address of the created service account
+- set the environment variable GWS_ADMIN_USER to the email address of the user you want to impersonate
 
 ## help
 
