@@ -41,7 +41,17 @@ func newApp() *cli.App {
 		},
 		cli.StringFlag{
 			Name:  "credentials",
-			Usage: "override the credentials file found in HOME",
+			Usage: "override the credentials file found in PWD or HOME",
+		},
+		cli.StringFlag{
+			Name:   "service-account, s",
+			Usage:  "the service account to impersonate to access Google Workspace",
+			EnvVar: "GWS_SERVICE_ACCOUNT",
+		},
+		cli.StringFlag{
+			Name:   "admin-user, u",
+			Usage:  "the admin user to impersonate on Google Workspace",
+			EnvVar: "GWS_ADMIN_USER",
 		},
 	}
 	format := cli.BoolFlag{

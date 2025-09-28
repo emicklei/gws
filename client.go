@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 
 	"github.com/urfave/cli"
@@ -21,18 +22,41 @@ var sharedClient *http.Client
 
 func sharedAuthClient(c *cli.Context) *http.Client {
 	once.Do(func() {
-		credfile := c.GlobalString("credentials")
-		if len(credfile) == 0 {
-			if info, err := os.Stat("gws-credentials.json"); err == nil && !info.IsDir() {
-				credfile = "gws-credentials.json"
+		if c.GlobalIsSet("admin-user") {
+			sharedClient = newAuthClientFromServiceAccount(
+				c.GlobalString("admin-user"),
+				c.GlobalString("service-account"))
+		} else {
+			credfile := c.GlobalString("credentials")
+			if len(credfile) == 0 {
+				if info, err := os.Stat("gws-credentials.json"); err == nil && !info.IsDir() {
+					credfile = "gws-credentials.json"
+				}
 			}
+			if len(credfile) == 0 {
+				credfile = filepath.Join(os.Getenv("HOME"), "gws-credentials.json")
+			}
+			sharedClient = newAuthClient(credfile)
 		}
-		if len(credfile) == 0 {
-			credfile = filepath.Join(os.Getenv("HOME"), "gws-credentials.json")
-		}
-		sharedClient = newAuthClient(credfile)
 	})
+
 	return sharedClient
+}
+
+var readOnlyScopes = []string{
+	admin.AdminDirectoryRolemanagementReadonlyScope,
+	admin.AdminDirectoryDomainReadonlyScope,
+	admin.AdminDirectoryGroupReadonlyScope,
+	admin.AdminDirectoryUserReadonlyScope,
+	"https://www.googleapis.com/auth/iam",
+}
+
+var readWriteScopes = []string{
+	admin.AdminDirectoryRolemanagementScope,
+	admin.AdminDirectoryGroupScope,
+	admin.AdminDirectoryUserScope,
+	admin.AdminDirectoryDomainReadonlyScope,
+	"https://www.googleapis.com/auth/iam",
 }
 
 func newAuthClient(credentialsFilename string) *http.Client {
@@ -52,11 +76,37 @@ func newAuthClient(credentialsFilename string) *http.Client {
 		// Create,Delete,Add,Remove
 		admin.AdminDirectoryGroupScope,
 		admin.AdminDirectoryUserScope,
+		"https://www.googleapis.com/auth/iam",
 	)
 	if err != nil {
 		log.Fatalf("Unable to parse client secret file to config: %v", err)
 	}
 	return getClient(config)
+}
+
+// create new auth client through service account delegation. WIll try to get read-write scopes
+// but falls back to read-only scopes.
+func newAuthClientFromServiceAccount(user string, serviceAccount string) *http.Client {
+	ctx := context.Background()
+
+	availableScopes := [][]string{
+		readWriteScopes,
+		readOnlyScopes,
+	}
+
+	var err error
+	for _, scopes := range availableScopes {
+		var tokenSource oauth2.TokenSource
+		tokenSource, err = getDelegatedUserToken(ctx, user, serviceAccount, scopes)
+		if err == nil {
+			return oauth2.NewClient(ctx, tokenSource)
+		}
+		if !strings.Contains(err.Error(), "unauthorized_client") {
+			break
+		}
+	}
+	log.Fatalf("Unable to get credentials: %v", err)
+	return nil
 }
 
 // Retrieve a token, saves the token, then returns the generated client.
