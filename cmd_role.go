@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/urfave/cli"
 	"golang.org/x/net/context"
 	admin "google.golang.org/api/admin/directory/v1"
+	"google.golang.org/api/iam/v1"
 	"google.golang.org/api/option"
 )
 
@@ -58,27 +60,60 @@ func cmdRoleAssignment(c *cli.Context) error {
 		}
 	}
 
+	if roleID == 0 {
+		return fmt.Errorf("unable to find role '%s'", roleName)
+	}
 	// find all assigments per role
 	ass, err := srv.RoleAssignments.List(myAccoutsCustomerID).RoleId(strconv.FormatInt(roleID, 10)).Do()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve roles in domain: %v", err)
 	}
 
-	users := []*admin.User{}
+	principals := []interface{}{}
+	emails := []string{}
 	for _, each := range ass.Items {
-		usr, err := srv.Users.Get(each.AssignedTo).Do()
-		if err != nil {
-			return fmt.Errorf("unable to retrieve user in domain: %v", err)
+		switch each.AssigneeType {
+		case "user":
+			usr, err := srv.Users.Get(each.AssignedTo).Do()
+			if err == nil {
+				emails = append(emails, usr.PrimaryEmail)
+				principals = append(principals, usr)
+				continue
+			}
+			sa, err := getServiceAccountByID(c, each.AssignedTo)
+			if err == nil {
+				emails = append(emails, sa.Email)
+				principals = append(principals, sa)
+				continue
+			}
+			log.Printf("unable to retrieve user %s, %s", each.AssignedTo, err)
+		case "group":
+			grp, err := srv.Groups.Get(each.AssignedTo).Do()
+			if err == nil {
+				emails = append(emails, grp.Email)
+				principals = append(principals, grp)
+				continue
+			}
+			log.Printf("unable to retrieve group %s, %s", each.AssignedTo, err)
+		default:
+			log.Printf("unknown assignee type %s", each.AssigneeType)
 		}
-		users = append(users, usr)
 	}
-	// find all the users
+	// find all the emails
 
-	if optionJSON(c, users) {
+	if optionJSON(c, principals) {
 		return nil
 	}
-	for _, u := range users {
-		fmt.Println(u.PrimaryEmail)
+	for _, email := range emails {
+		fmt.Println(email)
 	}
 	return nil
+}
+
+func getServiceAccountByID(c *cli.Context, uniqueId string) (*iam.ServiceAccount, error) {
+	client, err := iam.NewService(context.Background(), option.WithHTTPClient(sharedAuthClient(c)))
+	if err != nil {
+		return nil, err
+	}
+	return client.Projects.ServiceAccounts.Get("projects/-/serviceAccounts/" + uniqueId).Do()
 }
