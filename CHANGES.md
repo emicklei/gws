@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.0] - 2025-09-29
+
+- authentication through domain-wide delegation on service account (thanx @mvanholsteijn)
+
 ## [v1.1.0] - 2025-03-04
 
 - updated dependencies
